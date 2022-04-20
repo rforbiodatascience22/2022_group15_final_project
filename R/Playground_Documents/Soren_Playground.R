@@ -28,15 +28,9 @@ temp <- modeldat %>%
                cols = -Patient_Status,
                names_to = "Protein",
                values_to = "Expr_level") %>% 
-  group_by("Protein") %>% 
+  group_by(Protein) %>% 
   nest() %>% 
   ungroup()
-
-gravier_clean_long <- gravier_clean %>% 
-  pivot_longer(data = .,
-               cols = -outcome,
-               names_to = "Gene",
-               values_to = "log2_expr_level")
 
 # Model data
 my_data_clean %>% ...
