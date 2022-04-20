@@ -29,7 +29,6 @@ my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv",
                                        'myDate',
                                        'factor'))
 
-
 # Wrangle data ------------------------------------------------------------
 #my_data <- my_data_raw %>% 
 #  mutate(Gender_bool = case_when(Gender == 'FEMALE' ~ 1,
