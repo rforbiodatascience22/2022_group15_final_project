@@ -27,8 +27,8 @@ my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv",
                                        'character',
                                        'factor'))
 
-my_data_raw %>% 
-  count(Tumour_Stage == 'III')
+
+as.Date('19-Jun-17', format = "%d-%b-%y")
 
 
 # Wrangle data ------------------------------------------------------------
@@ -54,7 +54,7 @@ my_data_raw %>%
 # booleans 
 
 # Write data --------------------------------------------------------------
-write.csv(x = my_data, 
+write.csv(x = my_data_raw, 
           file = "data/01_my_data.csv")
 
 
