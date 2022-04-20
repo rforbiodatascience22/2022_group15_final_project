@@ -28,6 +28,7 @@ my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv",
                                        'myDate',
                                        'factor'))
 
+
 # Write data --------------------------------------------------------------
 write_csv(x = my_data_raw, 
           file = "data/01_my_data.csv")
