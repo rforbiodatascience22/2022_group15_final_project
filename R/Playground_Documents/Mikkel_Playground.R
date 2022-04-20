@@ -3,11 +3,11 @@ library("tidyverse")
 
 
 # Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
+#source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
+my_data_clean_aug <- read.csv(file = "data/03_my_data_clean_aug.tsv")
 
 
 # Wrangle data ------------------------------------------------------------

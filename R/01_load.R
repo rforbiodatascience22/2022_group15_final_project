@@ -3,7 +3,7 @@ library("tidyverse")
 library("fs")
 
 # Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
+#source(file = "R/99_project_functions.R")
 
 # Make our own class to deal with the date columns being different from the default
 setClass('myDate')
