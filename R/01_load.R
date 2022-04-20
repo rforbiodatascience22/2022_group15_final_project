@@ -6,6 +6,8 @@ library("fs")
 # Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
+setClass('myDate')
+setAs("character","myDate", function(from) as.Date(from, format="%d-%b-%y") )
 
 # Load data ---------------------------------------------------------------
 my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv", 
@@ -23,8 +25,8 @@ my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv",
                                        'factor',
                                        'factor',
                                        'factor',
-                                       'character',
-                                       'character',
+                                       'myDate',
+                                       'myDate',
                                        'factor'))
 
 my_data_raw %>% 
