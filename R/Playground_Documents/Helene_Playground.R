@@ -1,5 +1,6 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
+library("fs")
 
 
 # Define functions --------------------------------------------------------
@@ -19,7 +20,11 @@ my_data_clean_aug %>% ...
 
 
 # Visualise data ----------------------------------------------------------
-my_data_clean_aug %>% ...
+my_data_clean_aug %>%
+  ggplot(mapping = aes(x = Patient_Status,
+                       y = Diff_Time_Days)) +
+  geom_point() 
+  
 
 
 # Write data --------------------------------------------------------------
