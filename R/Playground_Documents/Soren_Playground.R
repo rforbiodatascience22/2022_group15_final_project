@@ -105,5 +105,4 @@ my_data_clean_count %>%
                       limits = c(0.0,0.5)) + 
   theme_classic()
 
-ggsave(filename = "testsave.png",
-       path = "R/Playground_Documents")
+ggsave(filename = "testsave.png")
