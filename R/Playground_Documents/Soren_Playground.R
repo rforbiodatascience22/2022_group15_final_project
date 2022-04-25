@@ -7,13 +7,6 @@
 # Sidenote: I do not have high hopes for good results here, but bad results are still results.
 #################
 
-# Install libraries
-install.packages("patchwork")
-install.packages("fs")
-install.packages("vroom")
-install.packages("broom")
-install.packages("purrr")
-
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 library("patchwork")
@@ -47,6 +40,7 @@ temp <- modeldat %>%
   nest() %>% 
   ungroup()
 
+# Model data
 models <- temp %>% 
   mutate(mu_group = map(data,
                         ~glm(outcome ~ Expr_level,
@@ -54,15 +48,22 @@ models <- temp %>%
                              family = binomial(link = "logit"))),
          tidied = map(.x = mu_group,
                       .f = tidy,
-                      conf.int = TRUE))
-
-# Model data
-my_data_clean %>% ...
-
+                      conf.int = TRUE)) %>% 
+  unnest(tidied) %>% 
+  filter(term != "(Intercept)")
 
 # Visualise data ----------------------------------------------------------
-my_data_clean %>% ...
-
+models %>% 
+  select(Protein,p.value) %>% 
+  ggplot(data = .,
+         mapping = aes(x = Protein,
+                       y = p.value,
+                       color = p.value)) + 
+  geom_point(mapping = aes(color = p.value)) + 
+  geom_hline(mapping = aes(yintercept = 0.05),
+             color = "Red",
+             alpha = 0.5) + 
+  theme_classic()
 
 # Write data --------------------------------------------------------------
 # write_tsv(...)
