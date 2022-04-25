@@ -1,5 +1,6 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
+library(dplyr)
 
 
 # Define functions --------------------------------------------------------
@@ -19,7 +20,7 @@ BRCA_data_long <- my_data_raw %>%
   pivot_longer(cols = everything(),
                names_to = 'Protein',
                values_to = 'Expression_Level')
-# Model data
+
 my_data_clean_aug <- my_data_raw %>%
   drop_na() %>%      
   mutate(Age_Group = case_when(Age <= 30 ~ "Under 30",
@@ -58,7 +59,7 @@ my_data_clean %>%
            color = 'black',
            fill = 'skyblue1') +
   labs(y = 'Percentage of patients') +
-  geom_text(aes(label=paste0(round(N,
+  geom_text(aes(label=str_c(round(N,
                                    digits = 2),'%')),
             position = position_dodge(width=0.4),
             vjust=-0.2) +
@@ -78,6 +79,52 @@ ggplot(BRCA_data_long,
   theme(axis.text.x=element_blank(),
         axis.title.x = element_blank())
 
-# Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+# Splitting and Joining on ID--------------------------------------------------------------
+
+#Dataset1
+my_data_protein <- my_data_clean %>%
+  select(Patient_ID,
+         matches('Protein'))
+
+#Dataset2
+my_data_histology <- my_data_clean %>%
+  select(Patient_ID,
+         Histology)
+
+#Dataset3 with ID, protein and histology
+my_data_joined1 <- my_data_protein %>%
+  inner_join(my_data_histology,
+             by = 'Patient_ID')
+
+#Dataset4 with ID, Protein and Expression level
+my_data_protein_long <- my_data_protein %>%
+  pivot_longer(cols = matches('Protein'),
+               names_to = 'Protein',
+               values_to = 'Expression_Level')
+
+my_data_joined2 <- my_data_protein_long %>%
+  outer_join(my_data_histology,
+             by = 'Patient_ID')
+
+#Dataset5 with empty cells
+subset1 <- my_data_clean[1:100, 1:4]
+subset2 <- my_data_clean[101:200, c(1,5:8)]
+
+#A dataset that is empty by inner joining
+my_data_joined3 <- subset1 %>%
+  inner_join(subset2,
+             by = 'Patient_ID')
+
+#Only subset1
+my_data_joined4 <- subset1 %>%
+  left_join(subset2,
+             by = 'Patient_ID')
+
+#subset1 and subset 2 have only patient ID un common
+my_data_joined5 <- subset1 %>%
+  full_join(subset2,
+            by = 'Patient_ID')
+
+#-------
+
+
