@@ -7,13 +7,6 @@
 # Sidenote: I do not have high hopes for good results here, but bad results are still results.
 #################
 
-# Install libraries
-install.packages("patchwork")
-install.packages("fs")
-install.packages("vroom")
-install.packages("broom")
-install.packages("purrr")
-
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 library("patchwork")
@@ -32,6 +25,8 @@ source(file = "R/99_project_functions.R")
 
 
 # Wrangle data ------------------------------------------------------------
+
+# Logistic Regression model
 modeldat <- my_data_clean %>% 
   mutate(outcome = case_when(Patient_Status == "Alive" ~ 0,
                              Patient_Status == "Dead" ~ 1)) %>% 
@@ -47,6 +42,7 @@ temp <- modeldat %>%
   nest() %>% 
   ungroup()
 
+## Model data
 models <- temp %>% 
   mutate(mu_group = map(data,
                         ~glm(outcome ~ Expr_level,
@@ -54,16 +50,60 @@ models <- temp %>%
                              family = binomial(link = "logit"))),
          tidied = map(.x = mu_group,
                       .f = tidy,
-                      conf.int = TRUE))
+                      conf.int = TRUE)) %>% 
+  unnest(tidied) %>% 
+  filter(term != "(Intercept)")
 
-# Model data
-my_data_clean %>% ...
+## Visualise data
+models %>% 
+  select(Protein,p.value) %>% 
+  ggplot(data = .,
+         mapping = aes(x = Protein,
+                       y = p.value,
+                       color = p.value)) + 
+  geom_point(mapping = aes(color = p.value)) + 
+  geom_hline(mapping = aes(yintercept = 0.05),
+             color = "Red",
+             alpha = 0.5) + 
+  theme_classic()
 
+# Protein expression vs. Cancer type, density map
+BRCA_data_long <- my_data_raw %>%
+  drop_na() %>%
+  select(matches('Protein'),Histology) %>%
+  pivot_longer(cols = 1:4,
+               names_to = 'Protein',
+               values_to = 'Expression_Level')
 
-# Visualise data ----------------------------------------------------------
-my_data_clean %>% ...
+BRCA_data_long %>% 
+  ggplot(data = .,
+         mapping = aes(x = Expression_Level,
+                       color = Histology)) + 
+  geom_density() + 
+  facet_wrap(~Protein,
+             nrow=4) +
+  theme_classic()
 
+# Heatmap
+my_data_clean_count <- my_data_clean %>% 
+  select(Histology,Surgery_type) %>% 
+  group_by(Histology,Surgery_type) %>% 
+  count() %>% 
+  ungroup() %>% 
+  group_by(Histology) %>% 
+  mutate(nc = n/sum(n)) %>% 
+  ungroup()
 
-# Write data --------------------------------------------------------------
-# write_tsv(...)
-# ggsave(...)
+my_data_clean_count %>% 
+  ggplot(data = .,
+         mapping = aes(x = Histology,
+                       y = Surgery_type,
+                       fill = nc)) + 
+  geom_tile() + 
+  scale_fill_gradient(low = "Black",
+                      high="White",
+                      limits = c(0.0,0.5)) + 
+  theme_classic()
+
+ggsave(filename = "testsave.png",
+       path = "R/Playground_Documents")
