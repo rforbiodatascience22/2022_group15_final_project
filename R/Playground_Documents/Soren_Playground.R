@@ -25,6 +25,8 @@ source(file = "R/99_project_functions.R")
 
 
 # Wrangle data ------------------------------------------------------------
+
+# Logistic Regression model
 modeldat <- my_data_clean %>% 
   mutate(outcome = case_when(Patient_Status == "Alive" ~ 0,
                              Patient_Status == "Dead" ~ 1)) %>% 
@@ -40,7 +42,7 @@ temp <- modeldat %>%
   nest() %>% 
   ungroup()
 
-# Model data
+## Model data
 models <- temp %>% 
   mutate(mu_group = map(data,
                         ~glm(outcome ~ Expr_level,
@@ -52,7 +54,7 @@ models <- temp %>%
   unnest(tidied) %>% 
   filter(term != "(Intercept)")
 
-# Visualise data ----------------------------------------------------------
+## Visualise data
 models %>% 
   select(Protein,p.value) %>% 
   ggplot(data = .,
@@ -65,6 +67,41 @@ models %>%
              alpha = 0.5) + 
   theme_classic()
 
-# Write data --------------------------------------------------------------
-# write_tsv(...)
-# ggsave(...)
+# Protein expression vs. Cancer type, density map
+BRCA_data_long <- my_data_raw %>%
+  drop_na() %>%
+  select(matches('Protein'),Histology) %>%
+  pivot_longer(cols = 1:4,
+               names_to = 'Protein',
+               values_to = 'Expression_Level')
+
+BRCA_data_long %>% 
+  ggplot(data = .,
+         mapping = aes(x = Expression_Level,
+                       color = Histology)) + 
+  geom_density() + 
+  facet_wrap(~Protein,
+             nrow=4) +
+  theme_classic()
+
+# Heatmap
+my_data_clean_count <- my_data_clean %>% 
+  select(Histology,Surgery_type) %>% 
+  group_by(Histology,Surgery_type) %>% 
+  count() %>% 
+  ungroup() %>% 
+  group_by(Histology) %>% 
+  mutate(nc = n/sum(n)) %>% 
+  ungroup()
+
+my_data_clean_count %>% 
+  ggplot(data = .,
+         mapping = aes(x = Histology,
+                       y = Surgery_type,
+                       fill = nc)) + 
+  geom_tile() + 
+  scale_fill_gradient(low = "Black",
+                      high="White",
+                      limits = c(0.0,0.5)) + 
+  theme_classic()
+
