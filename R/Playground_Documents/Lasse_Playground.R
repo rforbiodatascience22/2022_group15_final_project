@@ -37,19 +37,31 @@ my_data_clean %>%
 
 
 library(patchwork)
-p1 <- my_data_clean %>% 
+my_data_clean %>% 
+  filter(Age < 50) %>% 
   ggplot(mapping = aes(
-    x = Tumour_Stage,
-    y = Protein1)) + 
-  geom_boxplot(colour="009E73")
+    y = Protein4,
+    x = Patient_Status,
+    fill = Tumour_Stage)) + 
+  geom_boxplot(colour="#FF9999")
 
 p2 <- my_data_clean %>% 
+  filter(Age < 50) %>% 
   ggplot(mapping = aes(
-    x = Protein4,
-    y = Tumour_Stage)) + 
+    y = Protein4,
+    x = Patient_Status,
+    fill = Tumour_Stage)) + 
   geom_boxplot(colour="#FF9999")
 
 p1+p2
+
+
+my_data_clean %>% 
+  ggplot(mapping = aes(
+    x = Patient_Status,
+    y = Surgery_type,
+    color = Tumour_Stage)) + 
+  geom_jitter()
 
 # Write data --------------------------------------------------------------
 write_tsv(...)
