@@ -1,6 +1,7 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 library(dplyr)
+library(stringr)
 
 
 # Define functions --------------------------------------------------------
@@ -126,5 +127,24 @@ my_data_joined5 <- subset1 %>%
             by = 'Patient_ID')
 
 #-------
+
+#Making functions
+boxplot_mydata <- function(data, attribute1, attribute2){
+  my_plot <- ggplot(data,
+                    aes(x = {{attribute1}},
+                        y = {{attribute2}},
+                        color = {{attribute1}})) +
+    geom_boxplot() +
+    theme_bw() +
+    labs(y = str(attribute2)) +
+    theme(axis.text.x=element_blank(),
+          axis.title.x = element_blank())
+  
+  return(my_plot)
+}
+
+boxplot_mydata(BRCA_data_long,
+               Protein,
+               Expression_Level)
 
 
