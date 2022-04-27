@@ -11,9 +11,9 @@ Authors@R: c(
 Description: This is an app where you can explore the Real Breast Cancer
     Dataset
 License: What license is it under?
-URL: https://github.com/rforbiodatascience22/group_15_final_project_app
+URL: https://github.com/rforbiodatascience22/2022_group15_final_project/tree/mikkelswartz-app/shiny-app
 BugReports: 
-    https://github.com/rforbiodatascience22/group_15_final_project_app/issues
+    https://github.com/rforbiodatascience22/2022_group15_final_project/tree/mikkelswartz-app/shiny-app/issues
 Imports: 
     config (>= 0.3.1),
     golem (>= 0.3.2),
