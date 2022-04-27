@@ -1,5 +1,6 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
+library("broom")
 
 
 # Define functions --------------------------------------------------------
@@ -175,7 +176,6 @@ my_data_clean %>%
   ggplot(mapping = aes(x = HER2.status,
                        y = Protein4)) + 
   geom_violin()
-
 
 
 
