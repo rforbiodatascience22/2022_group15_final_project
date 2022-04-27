@@ -102,8 +102,7 @@ models %>%
 ggsave(filename = "ManhattanPlot.png",
        width = 2.5,
        height = 4,
-       units = "in",
-       path = "R/Playground_Documents")
+       units = "in")
 
 # Protein expression vs. Cancer type, density map
 BRCA_data_long <- my_data_raw %>%
