@@ -35,7 +35,7 @@ my_data <- read.csv(file = "data/01_my_data.csv",
 
 my_data_clean <- my_data %>% 
   drop_na(Patient_Status) %>% 
-  filter(Date_of_Last_Visit < as.Date("2021-05-25")) %>% 
+  filter(Date_of_Last_Visit < as.Date("2021-07-25")) %>% 
   select(-ER.status, -PR.status)
 
 # This reduces the data from 341 observations to 307 observations

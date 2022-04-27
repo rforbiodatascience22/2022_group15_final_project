@@ -2,6 +2,7 @@
 library("tidyverse")
 library("fs")
 library("patchwork")
+library('dplyr')
 
 
 # Define functions --------------------------------------------------------
@@ -13,6 +14,9 @@ my_data_clean_aug <- read.csv(file = "data/03_my_data_clean_aug.csv")
 
 
 # Wrangle data ------------------------------------------------------------
+
+my_data_clean_aug %>% 
+  mutate(across(where(is.numeric), scale))
 
 # Add column of death month.
 # Most people die in winter time. 

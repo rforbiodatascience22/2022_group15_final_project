@@ -14,7 +14,6 @@ library("patchwork")
 
 my_data_clean_aug <- read.csv(file = "data/03_my_data_clean_aug.csv")
 
-
 # Plotting an atribute 
 histrogram_count <- function(data, atribute){
   output <- ggplot(data, mapping = aes(x = {{atribute}})) + 
@@ -27,4 +26,5 @@ histrogram_count <- function(data, atribute){
 }
 
 histrogram_count(data = my_data_clean_aug, atribute = Patient_Status)
+
 
