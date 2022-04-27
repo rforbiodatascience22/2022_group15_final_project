@@ -5,7 +5,6 @@ foo <- function(x){
 bar <- function(x){
   return(x^2)
 }
-...
 
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
