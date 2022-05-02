@@ -70,15 +70,13 @@ my_data_clean %>%
                                    hjust = 1))
 
 #Plotting up the boxplot for each protein
-ggplot(BRCA_data_long,
+BRCA_data_long %>% 
+ggplot(
        aes(x = Protein,
-           y = Expression_Level,
-           color = Protein)) +
+           y = Expression_Level)) +
   geom_boxplot() +
   theme_bw() +
-  labs(y = 'Expression Level') +
-  theme(axis.text.x=element_blank(),
-        axis.title.x = element_blank())
+  labs(y = str_replace(deparse(substitute(Expression_Level)),'_',' '))
 
 # Splitting and Joining on ID--------------------------------------------------------------
 
@@ -129,22 +127,48 @@ my_data_joined5 <- subset1 %>%
 #-------
 
 #Making functions
-boxplot_mydata <- function(data, attribute1, attribute2){
+boxplot <- function(data, attribute1, attribute2){
   my_plot <- ggplot(data,
                     aes(x = {{attribute1}},
-                        y = {{attribute2}},
-                        color = {{attribute1}})) +
+                        y = {{attribute2}})) +
     geom_boxplot() +
     theme_bw() +
-    labs(y = str(attribute2)) +
-    theme(axis.text.x=element_blank(),
-          axis.title.x = element_blank())
+    labs(x = str_replace(deparse(substitute(attribute1)),'_',' '),
+         y = str_replace(deparse(substitute(attribute2)),'_',' '))
   
   return(my_plot)
 }
 
-boxplot_mydata(BRCA_data_long,
-               Protein,
-               Expression_Level)
+boxplot(BRCA_data_long,
+        Protein,
+        Expression_Level)
 
+scatterplot <- function(data, attribute1, attribute2){
+  my_plot <- ggplot(data,
+                    aes(x = {{attribute1}},
+                        y = {{attribute2}})) +
+    geom_point() +
+    theme_bw() +
+    labs(x = str_replace(deparse(substitute(attribute1)),'_',' '),
+         y = str_replace(deparse(substitute(attribute2)),'_',' '))
+  
+  return(my_plot)
+}
 
+scatterplot(my_data,
+        Protein1,
+        Protein2)
+
+histogram_count <- function(data, attribute){
+  my_plot <- ggplot(data,
+                    aes(x = {{attribute}})) +
+    geom_bar() +
+    theme_bw() +
+    labs(x = str_replace(deparse(substitute(attribute)),'_',' '),
+         y = 'Count')
+  
+  return(my_plot)
+}
+
+histogram_count(my_data,
+                Tumour_Stage)
