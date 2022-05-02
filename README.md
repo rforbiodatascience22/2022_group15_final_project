@@ -38,7 +38,7 @@ MIKKEL NEEDS TO WRITE SHINY APP OPERATION
     - [06_analysis_general_visualizations.R](./R/06_analysis_general_visualizations.R)
     - [99_project_functions.R](./R/99_project_functions.R)
 - [results](./results)
-    - [Manhatten_Plot_Logistic.png](./results/Manhatten_Plot_Logistic.png)
+    - [Manhattan_Plot_Logistic.png](./results/Manhattan_Plot_Logistic.png)
     - [p-value_table.csv](./results/p-value_table.csv)
 - [doc](./doc)
     - [Presentation.Rmd](./doc/Presentation.Rmd)
