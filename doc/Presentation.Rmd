@@ -1,11 +1,17 @@
 ---
 title: "Final Project"
-author: "Aldis, Helene, Lasse, Mikkel and Søren"
+subtitle: 'Group 15'
+author: 
+author: 
+- 'Aldís Helga Björgvinsdóttir'
+- 'Helene Wegener'
+- 'Lasse Rene'
+- 'Søren Sandgaard'
+- 'Mikkel Swartz'
 date: '2022-04-25'
 output:
-  slidy_presentation: default
-  ioslides_presentation: default
-  beamer_presentation: default
+  ioslides_presentation:
+    logo: DTU_Logo.png
 ---
 
 ```{r setup, include=FALSE}
@@ -17,8 +23,9 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 
-## Introduction to Dataset
+## Introduction to the Dataset
 
+### The Dataset
 -   "Real Breast Cancer Data"
 -   Source: www.kaggle.com
 -   Raw: 341 observations - 16 variables
@@ -31,14 +38,42 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 ![Alt text](/cloud/project/R/Playground_Documents/testsave.png){width=50%}
 
-## Slide with R Output
+## Work Flow
+- Picture for the workflow
 
 ```{r cars, echo = TRUE}
-summary(cars)
+#summary(cars)
 ```
 
-## Slide with Plot
+## Materials and Methods
+
+### Materials
+- The Clean Dataset
+
+### Methods
+- Logistic Regression
+- Principal Component Analysis
 
 ```{r pressure}
-plot(pressure)
+#plot(pressure)
 ```
+
+## Results
+
+### Data Vizulasation
+- Cool pictures that describe the data
+
+### Logistic Regression
+- LR plot
+
+
+### Principal Component Analysis
+- PCA plot
+
+### Shiny Application
+- Link
+
+## Discussion
+- No significant results from the dataset
+
+
