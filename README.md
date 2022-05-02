@@ -22,4 +22,26 @@ MIKKEL NEEDS TO WRITE SHINY APP OPERATION
 
 ## File Structure
 
--   [results](./results)
+- [data](./data)
+    - [_raw](./data/_raw)
+        - [BRCA2.csv](./data/_raw/BRCA2.csv)
+    - [01_my_data.csv](./data/01_my_data.csv)
+    - [02_my_data_clean.csv](./data/01_my_data_clean.csv)
+    - [03_my_data_clean_aug.csv](./data/01_my_data_clean_aug.csv)
+- [R](./R)
+    - [00_doit.R](./R/00_doit.R)
+    - [01_load.R](./R/01_load.R)
+    - [02_clean.R](./R/02_clean.R)
+    - [03_augment.R](./R/03_augment.R)
+    - [04_analysis_PCA.R](./R/04_analysis_PCA.R)
+    - [05_analysis_Logistic_Regression.R](./R/05_analysis_Logistic_Regression.R)
+    - [06_analysis_general_visualizations.R](./R/06_analysis_general_visualizations.R)
+    - [99_project_functions.R](./R/99_project_functions.R)
+- [results](./results)
+    - [Manhatten_Plot_Logistic.png](./results/Manhatten_Plot_Logistic.png)
+    - [p-value_table.csv](./results/p-value_table.csv)
+- [doc](./doc)
+    - [Presentation.Rmd](./doc/Presentation.Rmd)
+
+
+
