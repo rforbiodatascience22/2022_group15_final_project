@@ -3,9 +3,9 @@ title: "Final Project"
 author: "Aldis, Helene, Lasse, Mikkel and Søren"
 date: '2022-04-25'
 output:
-  slidy_presentation: default
-  ioslides_presentation: default
   beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -41,4 +41,14 @@ summary(cars)
 
 ```{r pressure}
 plot(pressure)
+```
+
+## Workflow
+
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./workflow.png")
+```
+## Fileflow 
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./fileflow.png")
 ```
