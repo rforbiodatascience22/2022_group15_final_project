@@ -27,7 +27,7 @@ data_wide <- outcome_data %>%
   select(Age,Protein1,Protein2,Protein3,Protein4,outcome) %>% 
   mutate(outcome = case_when(outcome == 0 ~ '0',
                              outcome == 1 ~ '1')) %>% 
-  mutate_at(c("Protein1", "Protein2","Protein3","Protein4","Age"), ~(scale(.) %>% as.vector))
+  mutate_at(c("Age","Protein1", "Protein2","Protein3","Protein4"), ~(scale(.) %>% as.vector))
 
 
 # Model data
@@ -60,11 +60,12 @@ pca_fit %>%
   geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
   geom_text(
     aes(label = column),
-    hjust = 1, nudge_x = -0.02, 
+    hjust = 1, nudge_x = 0.15, nudge_y = 0.08,
     color = "#904C2F") +
   coord_fixed() + # fix aspect ratio to 1:1
   theme_minimal_grid(12)
-ggsave(filename = "PCA_Rotation_Matrix.png")
+ggsave(filename = "PCA_Rotation_Matrix.png",
+       scale = 1.2)
 
 
 pca_fit %>%
