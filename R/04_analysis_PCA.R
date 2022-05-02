@@ -8,7 +8,7 @@ source(file = "/cloud/project/R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data_clean_aug <- read_tsv(file = "/cloud/project/data/03_my_data_clean_aug.tsv")
+my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
 
 
 # Wrangle data ------------------------------------------------------------
@@ -22,6 +22,7 @@ outcome_data <- my_data_clean_aug %>%
                              outcome == "Dead" ~ 1))
 
 
+#Collect and scale the relevant data 
 data_wide <- outcome_data %>% 
   select(Age,Protein1,Protein2,Protein3,Protein4,outcome) %>% 
   mutate(outcome = case_when(outcome == 0 ~ '0',
@@ -63,6 +64,7 @@ pca_fit %>%
     color = "#904C2F") +
   coord_fixed() + # fix aspect ratio to 1:1
   theme_minimal_grid(12)
+ggsave(filename = "PCA_Rotation_Matrix.png")
 
 
 pca_fit %>%
@@ -76,9 +78,9 @@ pca_fit %>%
     expand = expansion(mult = c(0, 0.01))
   ) +
   theme_minimal_grid(12)
-
+ggsave(filename = "PCA_Percentages.png")
 
 
 # Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+#write_tsv(...)
+#ggsave(...)
