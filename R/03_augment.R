@@ -12,7 +12,7 @@ my_data_clean <- read.csv(file = "/cloud/project/data/02_my_data_clean.csv")
 
 # Wrangle data ------------------------------------------------------------
 
-# Adding a column for time difference.
+# Adding columns: Patient status in binary, age group and death month.
 my_data_clean_aug <- my_data_clean %>% 
   mutate(Patient_Status_Binary = case_when(Patient_Status == "Alive" ~ 0,
                                            Patient_Status == "Dead" ~ 1),

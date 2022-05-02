@@ -37,8 +37,14 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 ![Alt text](/cloud/project/R/Playground_Documents/testsave.png){width=50%}
 
-## Work Flow
-- Picture for the workflow
+## Workflow
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./workflow.png")
+```
+## Fileflow 
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./fileflow.png")
+```
 
 ```{r cars, echo = TRUE}
 #summary(cars)
@@ -59,7 +65,7 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 ## Results
 
-### Data Vizulasation
+### Data Vizulisation
 - Cool pictures that describe the data
 
 ### Logistic Regression
@@ -74,5 +80,8 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 ## Discussion
 - No significant results from the dataset
+
+
+
 
 
