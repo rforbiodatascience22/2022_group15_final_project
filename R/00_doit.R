@@ -1,5 +1,5 @@
 # Run all scripts ---------------------------------------------------------
-source(file = "R/01_load.R")
-source(file = "R/02_clean.R")
-source(file = "R/03_augment.R")
-source(file = "R/04_analysis_PCA.R")
+source(file = "/cloud/project/R/01_load.R")
+source(file = "/cloud/project/R/02_clean.R")
+source(file = "/cloud/project/R/03_augment.R")
+source(file = "/cloud/project/R/04_analysis_PCA.R")
