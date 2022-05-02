@@ -1,8 +1,11 @@
 ---
 title: "Final Project"
-author: Aldis, Helene, Lasse, Mikkel and Søren
-output: ioslides_presentation
-date: '2022-05-09'
+author: "Aldis, Helene, Lasse, Mikkel and Søren"
+date: '2022-04-25'
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
