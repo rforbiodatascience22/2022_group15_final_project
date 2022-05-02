@@ -11,7 +11,7 @@ library("tidyverse")
 library("fs")
 library("patchwork")
 
-my_data_clean_aug <- read.csv(file = "data/03_my_data_clean_aug.csv")
+my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
 
 # Plotting an atribute 
 histrogram_count <- function(data, atribute){
