@@ -1,16 +1,30 @@
 ---
 title: "Final Project"
-author: Aldis, Helene, Lasse, Mikkel and Søren
-output: ioslides_presentation
+subtitle: 'Group 15'
+author: 
+- 'Aldís Helga Björgvinsdóttir'
+- 'Helene Wegener'
+- 'Lasse Rene'
+- 'Søren Sandgaard'
+- 'Mikkel Swartz'
 date: '2022-04-25'
+output:
+  ioslides_presentation:
+    logo: DTU_Logo.png
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Introduction to Dataset
+```{r}
+source(file = "/cloud/project/R/00_doit.R",local = FALSE)
+```
 
+
+## Introduction to the Dataset
+
+### The Dataset
 -   "Real Breast Cancer Data"
 -   Source: www.kaggle.com
 -   Raw: 341 observations - 16 variables
@@ -20,16 +34,54 @@ knitr::opts_chunk$set(echo = FALSE)
 -   Variables with no outcome (Patient status)
 -   Columns with only 1 unique variable (ER.Status and PR.Status)
 
+
 ![Alt text](/cloud/project/R/Playground_Documents/testsave.png){width=50%}
 
-## Slide with R Output
+## Workflow
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./workflow.png")
+```
+## Fileflow 
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("./fileflow.png")
+```
 
 ```{r cars, echo = TRUE}
-summary(cars)
+#summary(cars)
 ```
 
-## Slide with Plot
+## Materials and Methods
+
+### Materials
+- The Clean Dataset
+
+### Methods
+- Logistic Regression
+- Principal Component Analysis
 
 ```{r pressure}
-plot(pressure)
+#plot(pressure)
 ```
+
+## Results
+
+### Data Vizulisation
+- Cool pictures that describe the data
+
+### Logistic Regression
+- LR plot
+
+
+### Principal Component Analysis
+- PCA plot
+
+### Shiny Application
+- Link
+
+## Discussion
+- No significant results from the dataset
+
+
+
+
+

@@ -125,13 +125,18 @@ data_long_nested <- data_long %>%
   nest() %>% 
   ungroup()
 
-data_wide = Clean5 %>%
+data_wide <- Clean5 %>%
   select(outcome, pull(data_long_nested, Protein)) %>% 
   mutate(outcome = case_when(outcome == 0 ~ '0',
                              outcome == 1 ~ '1')) %>% 
   mutate_at(c("Protein1", "Protein2","Protein3","Protein4","Age"), ~(scale(.) %>% as.vector))
            
 
+data_wide <- Clean5 %>% 
+  select(Age,Protein1,Protein2,Protein3,Protein4,outcome) %>% 
+  mutate(outcome = case_when(outcome == 0 ~ '0',
+                             outcome == 1 ~ '1')) %>% 
+  mutate_at(c("Protein1", "Protein2","Protein3","Protein4","Age"), ~(scale(.) %>% as.vector))
 
 
 library('tidyverse')

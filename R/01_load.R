@@ -10,7 +10,7 @@ setClass('myDate')
 setAs("character","myDate", function(from) as.Date(from, format="%d-%b-%y") )
 
 # Load data and wrangle data ----------------------------------------------
-my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv", 
+my_data_raw <- read.csv(file = "/cloud/project/data/_raw/BRCA2.csv", 
                         colClasses = c('character',
                                        'numeric',
                                        'factor',
@@ -31,5 +31,5 @@ my_data_raw <- read.csv(file = "data/_raw/BRCA2.csv",
 
 # Write data --------------------------------------------------------------
 write_csv(x = my_data_raw, 
-          file = "data/01_my_data.csv")
+          file = "/cloud/project/data/01_my_data.csv")
 
