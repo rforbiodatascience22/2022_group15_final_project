@@ -4,3 +4,5 @@
 .Ruserdata
 doc/Presentation.html
 README.html
+*.png
+results/*.png
