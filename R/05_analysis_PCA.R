@@ -29,13 +29,10 @@ data_wide <- outcome_data %>%
                              outcome == 1 ~ '1')) %>% 
   mutate_at(c("Age","Protein1", "Protein2","Protein3","Protein4"), ~(scale(.) %>% as.vector))
 
-
 # Model data
 pca_fit <- data_wide %>% 
   select(where(is.numeric)) %>% # retain only numeric columns
   prcomp(scale = TRUE) # do PCA on scaled data
-
-
 
 # Visualise data ----------------------------------------------------------
 
@@ -43,7 +40,8 @@ pca_fit %>%
   augment(data_wide) %>% # add original dataset back in
   ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
   geom_point(size = 1.5) +
-  theme_half_open(12) + background_grid()
+  theme_classic() + 
+  background_grid()
 
 
 
