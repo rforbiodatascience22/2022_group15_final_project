@@ -89,14 +89,14 @@ dens_protein_BRCA <- function(data, proteins, attribute){
 
 #### PCA ANALYSIS ####
 
-pca_vis_BRCA <- function(data, PC1, PC2, Attribute=Patient_Status){
+pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
   # Renaming PC inputs
   PC_1 = str_c(".fitted",PC1)
   PC_2 = str_c(".fitted",PC2)
   
   # Select and scale data
   data_wide <- my_data_clean_aug %>% 
-    select("Age",matches("Protein"),{{Attribute}}) %>% 
+    select("Age",matches("Protein"),Attribute) %>% 
     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
               ~(scale(.) %>% as.vector))
   
