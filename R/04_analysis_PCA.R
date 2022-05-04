@@ -43,7 +43,8 @@ pca_fit %>%
   augment(data_wide) %>% # add original dataset back in
   ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
   geom_point(size = 1.5) +
-  theme_half_open(12) + background_grid()
+  theme_classic() + 
+  background_grid()
 
 
 
