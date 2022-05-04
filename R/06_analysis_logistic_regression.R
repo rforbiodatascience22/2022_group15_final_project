@@ -3,7 +3,7 @@ library("tidyverse")
 
 
 # Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
+source(file = "/cloud/project/R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
