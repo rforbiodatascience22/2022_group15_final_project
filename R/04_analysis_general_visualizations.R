@@ -67,19 +67,77 @@ BRCA_data_long %>%
   facet_wrap(~Protein,
              nrow=4) +
   our_theme() + 
-  labs(x = 'Expression Level', 
-      y = 'Density')
+  labs(title = 'Histology density by protein',
+       x = 'Expression Level', 
+       y = 'Density')
 
 ggsave(filename = 'histology_density_by_protein.png',
        path = '/cloud/project/results')
 
-# Most people die in winter time. 
+# The distribution of the month that people die in.
 my_data_clean_aug %>%
   filter(!is.na(Death_Month)) %>% 
-  ggplot(mapping = aes(x = Death_Month),
-         color = '') +
-  geom_bar() +
+  ggplot(mapping = aes(x = Death_Month)) +
+  geom_bar(color = 'black',
+           fill = '#1f77b4') +
   our_theme() +
-  labs(x = 'Death Month',
-       y = 'Count')
+  labs(title = 'Distribution of death month',
+       x = 'Death Month',
+       y = 'Count') 
+
+ggsave(filename = 'death_month_distribution.png',
+       path = '/cloud/project/results')
+
+# Age distribution
+# The age of the patients looks normal distributed in the boksplot.
+my_data_clean_aug %>% 
+  ggplot(mapping = aes(x = Age)) + 
+  geom_boxplot(color = 'black',
+               fill = '#1f77b4') + 
+  labs(title = 'Boxplot of Age',
+       x = 'Age',
+       y = 'Count') +
+  our_theme()
+
+ggsave(filename = 'age_boxplot.png',
+       path = '/cloud/project/results')
+
+# Age distribution
+my_data_clean_aug %>% 
+  ggplot(mapping = aes(x = Age)) + 
+  geom_bar(color = 'black',
+               fill = '#1f77b4') + 
+  labs(title = 'Distribution of Age',
+       x = 'Age',
+       y = 'Count') +
+  our_theme()
+
+ggsave(filename = 'age_bar_distribution.png',
+       path = '/cloud/project/results')
+
+# Barplot of the tumour stages filled by patient status 
+# Most patients have tumour stage II. Most of the patients are alive.
+my_data_clean_aug %>% 
+  ggplot(aes(x = Tumour_Stage,
+             group = Patient_Status)) + 
+  geom_bar(aes(y = ..prop.., 
+               fill = factor(..x..)), 
+           stat="count",
+           color = 'black') +
+  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), 
+            stat= "count", 
+            vjust = -.2) +
+  labs(title = 'Distribution of tumour stage and patient status',
+       x = "Tumour Stage",
+       y = '') +
+  facet_grid(~Patient_Status) +
+  scale_y_continuous(labels = scales::percent) +
+  our_theme(legend_position = 'none')
+
+ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
+       path = '/cloud/project/results')
+
+
 

@@ -126,7 +126,7 @@ my_data_clean_aug %>%
 # Mean is a little under 60
 my_data_clean_aug %>% 
   ggplot(mapping = aes(x = Age)) + 
-  geom_boxplot() + 
+  geom_bar() + 
   labs(x = 'Age',
        y = 'Count') +
   theme_minimal(base_family = 'Avenir',
