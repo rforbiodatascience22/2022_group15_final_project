@@ -53,8 +53,6 @@ ggsave(filename = 'percent_histology.png',
 
 #Protein expression by histology
 
-
-
 BRCA_data_long <- my_data_clean_aug %>%
   select(matches('Protein'),Histology) %>%
   pivot_longer(cols = 1:4,
@@ -68,8 +66,4 @@ BRCA_data_long %>%
   geom_density() + 
   facet_wrap(~Protein,
              nrow=4) +
-  theme_classic()
-
-# Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+  our_theme()
