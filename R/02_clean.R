@@ -1,36 +1,14 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 
-
-# Define functions --------------------------------------------------------
-#source(file = "R/99_project_functions.R")
-
 # Load data ---------------------------------------------------------------
-my_data <- read.csv(file = "/cloud/project/data/01_my_data.csv",
-        na.strings = '',
-        colClasses = c('character',
-                        'numeric',
-                        'factor',
-                        'numeric',
-                        'numeric',
-                        'numeric',
-                        'numeric',
-                        'factor',
-                        'factor',
-                        'factor',
-                        'factor',
-                        'factor',
-                        'factor',
-                        'Date',
-                        'Date',
-                        'factor'))
-
+my_data <- read.csv(file = "/cloud/project/data/01_my_data.csv")
 
 # Wrangle data ------------------------------------------------------------
 
 # Drop rows where:
-## Patient status is not-available.
-## Date_of_Last_Visit happens in the future (from when the dataset was last updated on Kaggle)
+# Patient status is not-available
+# Date_of_Last_Visit happens in the future (from when the dataset was last updated on Kaggle)
 # Drop columns ER.status and PR.status as these are all positive
 
 my_data_clean <- my_data %>% 

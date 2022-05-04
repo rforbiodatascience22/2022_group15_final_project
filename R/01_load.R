@@ -2,15 +2,13 @@
 library("tidyverse")
 library("fs")
 
-# Define functions --------------------------------------------------------
-#source(file = "R/99_project_functions.R")
-
 # Make our own class to deal with the date columns being different from the default
 setClass('myDate')
 setAs("character","myDate", function(from) as.Date(from, format="%d-%b-%y") )
 
 # Load data and wrangle data ----------------------------------------------
-my_data_raw <- read.csv(file = "/cloud/project/data/_raw/BRCA2.csv", 
+my_data_raw <- read.csv(file = "/cloud/project/data/_raw/BRCA2.csv",
+                        na.strings = '',
                         colClasses = c('character',
                                        'numeric',
                                        'factor',

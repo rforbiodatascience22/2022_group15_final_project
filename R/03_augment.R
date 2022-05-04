@@ -2,13 +2,8 @@
 library("tidyverse")
 library("fs")
 
-# Define functions --------------------------------------------------------
-source(file = "/cloud/project/R/99_project_functions.R")
-
-
 # Load data ---------------------------------------------------------------
 my_data_clean <- read.csv(file = "/cloud/project/data/02_my_data_clean.csv")
-
 
 # Wrangle data ------------------------------------------------------------
 
