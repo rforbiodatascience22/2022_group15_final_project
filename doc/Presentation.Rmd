@@ -37,20 +37,20 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 <div style="float: left; width: 15%;">
 ```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
-knitr::include_graphics("./breastcancer.png")
+#knitr::include_graphics("./breastcancer.png")
 ```
 </div>
 
 ## Workflow
 <div style="float: left; width: 40%;">
 ```{r workflow, echo=FALSE, out.width='250px', out.height='500px', fig.align= 'center'}
-knitr::include_graphics("./workflow.png")
+#knitr::include_graphics("./workflow.png")
 ```
 </div>
 
 <div style="float: left; width: 50%;">
 ```{r fileflow, echo=FALSE, out.width='450px', out.height='500px', fig.pos = 'center'}
-knitr::include_graphics("./fileflow.png")
+#knitr::include_graphics("./fileflow.png")
 ```
 </div>
 
@@ -64,10 +64,6 @@ knitr::include_graphics("./fileflow.png")
 - Principal Component Analysis
 
 ## Results
-
-```{r percent_histology, echo=FALSE', fig.align= 'center'}
-knitr::include_graphics(".png")
-```
 
 ### Data Vizulisation
 

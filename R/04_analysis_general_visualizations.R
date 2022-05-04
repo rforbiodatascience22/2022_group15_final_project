@@ -1,5 +1,7 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
+library("fs")
+library("patchwork")
 
 # Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
@@ -30,7 +32,7 @@ ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
 #Percent of histology recreation from kaggle:
 my_data_clean_aug %>%     
   group_by(Histology) %>% 
-  summarise(N = 100*(n() / nrow(my_data_raw))) %>%
+  summarise(N = 100*(n() / nrow(my_data_clean_aug))) %>%
   ggplot(aes(x = Histology,
              y = N)) +
   geom_bar(stat="identity",
@@ -45,13 +47,14 @@ my_data_clean_aug %>%
   ylim(0,80) +
   our_theme(x_angle = 45)
 
-ggsave(filename = 'percent_histology.png',
+ggsave(filename = 'recreation_percent_histology.png',
        path = '/cloud/project/results')
 
 #Protein expression by histology
 
+#Making new a new variable Protein
 BRCA_data_long <- my_data_clean_aug %>%
-  select(matches('Protein'),Histology) %>%
+  select(matches('Protein'), Histology) %>%
   pivot_longer(cols = 1:4,
                names_to = 'Protein',
                values_to = 'Expression_Level')
@@ -67,6 +70,9 @@ BRCA_data_long %>%
   labs(x = 'Expression Level', 
       y = 'Density')
 
+ggsave(filename = 'histology_density_by_protein.png',
+       path = '/cloud/project/results')
+
 # Most people die in winter time. 
 my_data_clean_aug %>%
   filter(!is.na(Death_Month)) %>% 
@@ -76,3 +82,4 @@ my_data_clean_aug %>%
   our_theme() +
   labs(x = 'Death Month',
        y = 'Count')
+
