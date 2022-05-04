@@ -7,7 +7,7 @@ library("ggplot2")
 library("cowplot")
 
 # Load data
-my_data_clean_aug <- read.csv(file = "/cloud/project/project_files/data/03_my_data_clean_aug.csv",
+my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
                               na.strings = '',
                               colClasses = c('character',
                                              'numeric',
