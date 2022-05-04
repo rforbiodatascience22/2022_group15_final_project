@@ -22,7 +22,12 @@ outcome_data <- my_data_clean_aug %>%
 
 #Collect and scale the relevant data 
 data_wide <- outcome_data %>% 
-  select(Age,Protein1,Protein2,Protein3,Protein4,outcome) %>% 
+  select(Age,
+         Protein1,
+         Protein2,
+         Protein3,
+         Protein4,
+         outcome) %>% 
   mutate(outcome = case_when(outcome == 0 ~ '0',
                              outcome == 1 ~ '1')) %>% 
   mutate_at(c("Age","Protein1", "Protein2","Protein3","Protein4"), ~(scale(.) %>% as.vector))
@@ -44,6 +49,9 @@ pca_fit %>%
                                 "1" = "#fb0100"))
 
 ggsave(filename = 'PCA_fitted_PCs.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 # define arrow style for plotting
@@ -73,6 +81,9 @@ pca_fit %>%
   our_theme()
 
 ggsave(filename = 'PCA_rotation_matrix.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 pca_fit %>%
@@ -87,5 +98,9 @@ pca_fit %>%
                      expand = expansion(mult = c(0, 0.01))) +
   our_theme() +
   labs(y = 'Percentage')
+
 ggsave(filename = 'PCA_barplot_PCAs.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
