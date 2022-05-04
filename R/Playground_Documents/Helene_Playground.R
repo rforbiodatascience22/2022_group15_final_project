@@ -135,18 +135,6 @@ my_data_clean_aug %>%
 ggsave(filename = 'helene_playground_AgePlot.png',
        path = 'R/Playground_Documents')
 
-# Boxplot of difference in date of surgery to date of last visit
-my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = Diff_Time_Days)) + 
-  geom_boxplot() + 
-  labs(x = 'Difference in date of sugrgery to date of last visit',
-       y = 'Count') +
-  theme_minimal(base_family = 'Avenir',
-                base_size = 10)
-
-ggsave(filename = 'helene_playground_Time_Diff_plot.png',
-       path = 'R/Playground_Documents')
-
 # Recreating plots
 my_data_clean_aug %>% 
   ggplot(mapping = aes(x = Age_Group,

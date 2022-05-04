@@ -6,13 +6,15 @@ library("patchwork")
 my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
 
 # Function for main plot theme
-our_theme <- function(legend_position = 'right', x_angle = 0){
+our_theme <- function(legend_position = 'right', 
+                      x_angle = 0){
   theme_minimal(base_family = 'Avenir',
                 base_size = 10) +
   theme(axis.text.x = element_text(angle = x_angle, hjust=1),
           legend.position = legend_position,
           plot.title = element_text(hjust = 0.5),
-          panel.grid.minor = element_line(colour="white", size=0.5))
+          panel.grid.minor = element_line(colour="white", 
+                                          size=0.5))
 }
 
 # Plotting an atribute 
