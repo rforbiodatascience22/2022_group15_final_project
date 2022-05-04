@@ -66,4 +66,6 @@ BRCA_data_long %>%
   geom_density() + 
   facet_wrap(~Protein,
              nrow=4) +
-  our_theme()
+  our_theme() + 
+  labs(x = 'Expression Level', 
+      y = 'Density')
