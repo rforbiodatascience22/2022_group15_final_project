@@ -1,16 +1,16 @@
 ---
 title: "Final Project"
-subtitle: 'Group 15'
-author: 
-- 'Aldís Helga Björgvinsdóttir'
-- 'Helene Wegener'
-- 'Lasse Rene'
-- 'Søren Sandgaard'
-- 'Mikkel Swartz'
+author:
+- Aldís Helga Björgvinsdóttir
+- Helene Wegener
+- Lasse Rene
+- Søren Sandgaard
+- Mikkel Swartz
 date: '2022-04-25'
 output:
   ioslides_presentation:
     logo: DTU_Logo.png
+subtitle: Group 15
 ---
 
 ```{r setup, include=FALSE}
@@ -21,34 +21,38 @@ knitr::opts_chunk$set(echo = FALSE)
 source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
-
 ## Introduction to the Dataset
-
+<div style="float: left; width: 85%;">
 ### The Dataset
--   "Real Breast Cancer Data"
--   Source: www.kaggle.com
--   Raw: 341 observations - 16 variables
--   Clean: 307 observations - 14 variables
+-   Real Breast Cancer Data
+-   [Source](https://www.kaggle.com/code/varshinipj/breast-cancer-gene-data/data)
+-   Raw dataset has 341 observations and 16 variables
+-   Clean dataset has 307 observations and 14 variables
 
 ### Removed
--   Variables with no outcome (Patient status)
--   Columns with only 1 unique variable (ER.Status and PR.Status)
+-   Variables with no Patient Status
+-   Columns with only one unique variable
+-   Date of last visit in the future
+</div>
 
-
-![Alt text](/cloud/project/R/Playground_Documents/testsave.png){width=50%}
+<div style="float: left; width: 15%;">
+```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
+knitr::include_graphics("./breastcancer.png")
+```
+</div>
 
 ## Workflow
-```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+<div style="float: left; width: 40%;">
+```{r workflow, echo=FALSE, out.width='250px', out.height='500px', fig.align= 'center'}
 knitr::include_graphics("./workflow.png")
 ```
-## Fileflow 
-```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+</div>
+
+<div style="float: left; width: 50%;">
+```{r fileflow, echo=FALSE, out.width='450px', out.height='500px', fig.pos = 'center'}
 knitr::include_graphics("./fileflow.png")
 ```
-
-```{r cars, echo = TRUE}
-#summary(cars)
-```
+</div>
 
 ## Materials and Methods
 
@@ -59,14 +63,14 @@ knitr::include_graphics("./fileflow.png")
 - Logistic Regression
 - Principal Component Analysis
 
-```{r pressure}
-#plot(pressure)
-```
-
 ## Results
 
+```{r percent_histology, echo=FALSE', fig.align= 'center'}
+knitr::include_graphics(".png")
+```
+
 ### Data Vizulisation
-- Cool pictures that describe the data
+
 
 ### Logistic Regression
 - LR plot

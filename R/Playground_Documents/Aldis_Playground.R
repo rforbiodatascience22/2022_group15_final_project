@@ -51,7 +51,7 @@ ggplot(my_data_clean_aug, aes(x = Age_Group)) +
   theme_bw()
 
 # Percentage of histology
-my_data_clean %>%     
+myplot <- my_data_clean %>%     
   group_by(Histology) %>% 
   summarise(N = 100*(n() / nrow(my_data_raw))) %>%
   ggplot(aes(x = Histology,
@@ -69,6 +69,11 @@ my_data_clean %>%
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 1))
 
+ggsave(filename = 'percent_histology.png',
+       path = '/Cloud/project/results')
+
+ggsave(filename = 'helene_playground_Time_Diff_plot.png',
+       path = 'R/Playground_Documents')
 #Plotting up the boxplot for each protein
 BRCA_data_long %>% 
 ggplot(
@@ -170,5 +175,5 @@ histogram_count <- function(data, attribute){
   return(my_plot)
 }
 
-histogram_count(my_data,
-                Tumour_Stage)
+ggsave(filename = 'aldis_playground_percentage_lot.png',
+       path = 'R/Doc')
