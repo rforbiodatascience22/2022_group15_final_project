@@ -1,10 +1,10 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
-
+library("fs")
+library("patchwork")
 
 # Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
-
 
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
@@ -32,7 +32,7 @@ ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
 #Percent of histology recreation from kaggle:
 my_data_clean_aug %>%     
   group_by(Histology) %>% 
-  summarise(N = 100*(n() / nrow(my_data_raw))) %>%
+  summarise(N = 100*(n() / nrow(my_data_clean_aug))) %>%
   ggplot(aes(x = Histology,
              y = N)) +
   geom_bar(stat="identity",
@@ -46,7 +46,7 @@ my_data_clean_aug %>%
             vjust=-0.2) +
   ylim(0,80) +
   our_theme(x_angle = 45)
-  
+
 ggsave(filename = 'recreation_percent_histology.png',
        path = '/cloud/project/results')
 
@@ -54,7 +54,7 @@ ggsave(filename = 'recreation_percent_histology.png',
 
 #Making new a new variable Protein
 BRCA_data_long <- my_data_clean_aug %>%
-  select(matches('Protein'),Histology) %>%
+  select(matches('Protein'), Histology) %>%
   pivot_longer(cols = 1:4,
                names_to = 'Protein',
                values_to = 'Expression_Level')
@@ -66,8 +66,20 @@ BRCA_data_long %>%
   geom_density() + 
   facet_wrap(~Protein,
              nrow=4) +
-  theme_classic()
+  our_theme() + 
+  labs(x = 'Expression Level', 
+      y = 'Density')
 
-# Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+ggsave(filename = 'histology_density_by_protein.png',
+       path = '/cloud/project/results')
+
+# Most people die in winter time. 
+my_data_clean_aug %>%
+  filter(!is.na(Death_Month)) %>% 
+  ggplot(mapping = aes(x = Death_Month),
+         color = '') +
+  geom_bar() +
+  our_theme() +
+  labs(x = 'Death Month',
+       y = 'Count')
+
