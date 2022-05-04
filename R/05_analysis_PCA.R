@@ -6,11 +6,9 @@ library('cowplot')
 # Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")
 
-
 # Load data ---------------------------------------------------------------
-my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
-
-
+my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
+                              show_col_types = FALSE)
 # Wrangle data ------------------------------------------------------------
 
 outcome_data <- my_data_clean_aug %>%
@@ -38,48 +36,56 @@ pca_fit <- data_wide %>%
 
 pca_fit %>%
   augment(data_wide) %>% # add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
+  ggplot(aes(.fittedPC1, .fittedPC2,
+             color = outcome)) + 
   geom_point(size = 1.5) +
-  theme_classic() + 
-  background_grid()
+  our_theme() +
+  scale_color_manual(values = c("0" = "#1f77b4",
+                                "1" = "#fb0100"))
 
-
+ggsave(filename = 'PCA_fitted_PCs.png',
+       path = '/cloud/project/results')
 
 # define arrow style for plotting
 arrow_style <- arrow(
-  angle = 20, ends = "first", type = "closed", length = grid::unit(8, "pt")
+  angle = 20, ends = "first",
+  type = "closed",
+  length = grid::unit(8, "pt")
 )
 
 # plot rotation matrix
 pca_fit %>%
   tidy(matrix = "rotation") %>%
-  pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
-  ggplot(aes(PC1, PC2)) +
-  geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
-  geom_text(
-    aes(label = column),
-    hjust = 1, nudge_x = 0.15, nudge_y = 0.08,
-    color = "#904C2F") +
-  coord_fixed() + # fix aspect ratio to 1:1
-  theme_minimal_grid(12)
-ggsave(filename = "PCA_Rotation_Matrix.png",
-       scale = 1.2)
+  pivot_wider(names_from = "PC",
+              names_prefix = "PC",
+              values_from = "value") %>%
+  ggplot(aes(x = PC1,
+             y = PC2)) +
+  geom_segment(xend = 0,
+               yend = 0,
+               arrow = arrow_style) +
+  geom_text(aes(label = column),
+            hjust = 1,
+            nudge_x = 0.15,
+            nudge_y = 0.08,
+            color = "#fb0100") +
+  coord_fixed() +
+  our_theme()
 
+ggsave(filename = 'PCA_rotation_matrix.png',
+       path = '/cloud/project/results')
 
 pca_fit %>%
   tidy(matrix = "eigenvalues") %>%
   filter(PC <= 10) %>% 
-  ggplot(aes(PC, percent)) +
-  geom_col(fill = "#56B4E9", alpha = 0.8) +
+  ggplot(aes(x = PC,
+             y = percent)) +
+  geom_col(fill = "#1f77b4",
+           color = 'black') +
   scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(
-    labels = scales::percent_format(),
-    expand = expansion(mult = c(0, 0.01))
-  ) +
-  theme_minimal_grid(12)
-ggsave(filename = "PCA_Percentages.png")
-
-
-# Write data --------------------------------------------------------------
-#write_tsv(...)
-#ggsave(...)
+  scale_y_continuous(labels = scales::percent_format(),
+                     expand = expansion(mult = c(0, 0.01))) +
+  our_theme() +
+  labs(y = 'Percentage')
+ggsave(filename = 'PCA_barplot_PCAs.png',
+       path = '/cloud/project/results')

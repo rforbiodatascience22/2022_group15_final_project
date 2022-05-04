@@ -17,7 +17,7 @@ my_data_clean_aug %>%
   ggplot(mapping = aes(x = Age_Group,
                        fill = Histology)) +
   geom_bar(color = "black") +
-  facet_wrap(~ Histology) +
+  facet_wrap(vars(Histology)) +
   scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
   labs(title = 'Age ranges for each cancer type',
        x = 'Age ranges',
@@ -132,7 +132,7 @@ my_data_clean_aug %>%
   labs(title = 'Distribution of tumour stage and patient status',
        x = "Tumour Stage",
        y = '') +
-  facet_grid(~Patient_Status) +
+  facet_wrap(vars(Patient_Status)) +
   scale_y_continuous(labels = scales::percent) +
   our_theme(legend_position = 'none')
 
