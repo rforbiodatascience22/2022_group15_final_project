@@ -2,8 +2,30 @@
 library("tidyverse")
 library("fs")
 library("patchwork")
+library("broom")
+library("ggplot2")
+library("cowplot")
 
-my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
+# Load data
+my_data_clean_aug <- read.csv(file = "/cloud/project/project_files/data/03_my_data_clean_aug.csv",
+                              na.strings = '',
+                              colClasses = c('character',
+                                             'numeric',
+                                             'factor',
+                                             'numeric',
+                                             'numeric',
+                                             'numeric',
+                                             'numeric',
+                                             'factor',
+                                             'factor',
+                                             'factor',
+                                             'factor',
+                                             'Date',
+                                             'Date',
+                                             'factor',
+                                             'numeric'))
+
+#my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
 
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
@@ -26,8 +48,7 @@ histrogram_count <- function(data, atribute){
   
   return(output)
 }
-
-histrogram_count(data = my_data_clean_aug, atribute = Patient_Status)
+#histrogram_count(data = my_data_clean_aug, atribute = Patient_Status)
 
 # Plotting protein expression vs. type of cancer
 dens_protein_BRCA <- function(data, proteins, attribute){
@@ -35,35 +56,122 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     select({{proteins}},{{attribute}}) %>%
     pivot_longer(cols = 1:length({{proteins}}),
                  names_to = 'Protein',
-                 values_to = 'Expression_Level') %>% 
+                 values_to = 'Expression_Level') %>%
     ggplot(data = .,
-           mapping = aes(x = Expression_Level,
-                         color = {{attribute}})) + 
-    geom_density() + 
+           mapping = aes_string(x = "Expression_Level",
+                                color = attribute)) +
+    ggplot2::labs(x = "Expression Level",
+                  y = "Density") +
+    geom_density() +
     facet_wrap(~Protein,
                nrow=4) +
-    our_theme()
+    theme_classic() +
+    theme(legend.position = "bottom")
 }
+
+### Old version below - can properly be removed
+# Plotting protein expression vs. type of cancer
+# dens_protein_BRCA <- function(data, proteins, attribute){
+#   data %>%
+#     select({{proteins}},{{attribute}}) %>%
+#     pivot_longer(cols = 1:length({{proteins}}),
+#                  names_to = 'Protein',
+#                  values_to = 'Expression_Level') %>% 
+#     ggplot(data = .,
+#            mapping = aes(x = Expression_Level,
+#                          color = {{attribute}})) + 
+#     geom_density() + 
+#     facet_wrap(~Protein,
+#                nrow=4) +
+#     our_theme()
+# }
 
 
 #### PCA ANALYSIS ####
+
 pca_vis_BRCA <- function(data, PC1, PC2){
-  data_wide <- data %>% 
-    select(Age,matches("Protein"),Patient_Status_Binary) %>% 
+  data_wide <- data %>%
+    select(Age,matches("Protein"),Patient_Status_Binary) %>%
     mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
-                                             Patient_Status_Binary == 1 ~ '1')) %>% 
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
+                                             Patient_Status_Binary == 1 ~ '1')) %>%
+    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"),
               ~(scale(.) %>%  as.vector))
   
-  data_wide %>% 
+  data_wide %>%
     select(where(is.numeric)) %>%
-    prcomp(scale = TRUE) %>% 
-    augment(data_wide) %>% 
-    ggplot(aes(x = .fittedPC1, 
-               y = .fittedPC2, 
-               color = Patient_Status_Binary)) + 
+    prcomp(scale = TRUE) %>%
+    augment(data_wide) %>%
+    ggplot(aes(x = .fittedPC1,
+               y = .fittedPC2,
+               color = Patient_Status_Binary)) +
     geom_point(size = 1.5) +
     scale_color_discrete() +
-    theme_classic() + 
-    background_grid()
+    theme_classic() +
+    background_grid() +
+    theme(legend.position = "bottom")
 }
+
+### Old version below - can properly be removed
+# pca_vis_BRCA <- function(data, PC1, PC2){
+#   data_wide <- data %>% 
+#     select(Age,matches("Protein"),Patient_Status_Binary) %>% 
+#     mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
+#                                              Patient_Status_Binary == 1 ~ '1')) %>% 
+#     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
+#               ~(scale(.) %>%  as.vector))
+#   
+#   data_wide %>% 
+#     select(where(is.numeric)) %>%
+#     prcomp(scale = TRUE) %>% 
+#     augment(data_wide) %>% 
+#     ggplot(aes(x = .fittedPC1, 
+#                y = .fittedPC2, 
+#                color = Patient_Status_Binary)) + 
+#     geom_point(size = 1.5) +
+#     scale_color_discrete() +
+#     theme_classic() + 
+#     background_grid()
+# }
+
+
+# Boxplot - factorial as x, nummeric as y.
+boxplot_BRCA <- function(data, attribute1, attribute2, attribute3){
+  my_plot <- data %>%
+    ggplot2::ggplot(ggplot2::aes_string(x = attribute1,
+                                        y = attribute2,
+                                        color = attribute3)) +
+    ggplot2::geom_boxplot() +
+    ggplot2::labs(x = stringr::str_replace(attribute1,'_',' '),
+                  y = attribute2) +
+    ggplot2::theme_classic() +
+    ggplot2::theme(legend.position = "bottom")
+  return(my_plot)
+}
+
+# Violin - factorial as x, nummeric as y.
+violin_BRCA <- function(data, attribute1, attribute2, attribute3){
+  my_plot <- data %>%
+    ggplot2::ggplot(ggplot2::aes_string(x = attribute1,
+                                        y = attribute2,
+                                        color = attribute3)) +
+    ggplot2::geom_violin() +
+    ggplot2::labs(x = stringr::str_replace(attribute1,'_',' '),
+                  y = attribute2) +
+    ggplot2::theme_classic() +
+    ggplot2::theme(legend.position = "bottom")
+  return(my_plot)
+}
+
+# barplot - factorial as x
+barplot_BRCA <- function(data, attribute1, attribute2){
+  my_plot <- data %>%
+    ggplot2::ggplot(ggplot2::aes_string(x = attribute1,
+                                        fill = attribute2)) +
+    ggplot2::geom_bar() +
+    ggplot2::labs(x = stringr::str_replace(attribute1,'_',' '),
+                  y = "Count") +
+    ggplot2::theme_classic() +
+    ggplot2::theme(legend.position = "bottom")
+  return(my_plot)
+}
+
