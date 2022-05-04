@@ -47,14 +47,12 @@ my_data_clean_aug %>%
   ylim(0,80) +
   our_theme(x_angle = 45)
   
-
-ggsave(filename = 'percent_histology.png',
+ggsave(filename = 'recreation_percent_histology.png',
        path = '/cloud/project/results')
 
 #Protein expression by histology
 
-
-
+#Making new a new variable Protein
 BRCA_data_long <- my_data_clean_aug %>%
   select(matches('Protein'),Histology) %>%
   pivot_longer(cols = 1:4,
