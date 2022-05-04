@@ -1,10 +1,8 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 
-
 # Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
-
 
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
@@ -46,7 +44,6 @@ my_data_clean_aug %>%
             vjust=-0.2) +
   ylim(0,80) +
   our_theme(x_angle = 45)
-  
 
 ggsave(filename = 'percent_histology.png',
        path = '/cloud/project/results')
@@ -69,3 +66,13 @@ BRCA_data_long %>%
   our_theme() + 
   labs(x = 'Expression Level', 
       y = 'Density')
+
+# Most people die in winter time. 
+my_data_clean_aug %>%
+  filter(!is.na(Death_Month)) %>% 
+  ggplot(mapping = aes(x = Death_Month),
+         color = '') +
+  geom_bar() +
+  our_theme() +
+  labs(x = 'Death Month',
+       y = 'Count')
