@@ -118,6 +118,38 @@ ggsave(filename = 'age_bar_distribution.png',
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
+<<<<<<< HEAD
+# Most patients have tumour stage II. Most of the patients are alive.
+my_data_clean_aug %>% 
+  ggplot(aes(x = Tumour_Stage,
+             group = Patient_Status)) + 
+  geom_bar(aes(y = ..prop.., 
+               fill = factor(..x..)), 
+           stat="count",
+           color = 'black') +
+  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), 
+            stat= "count", 
+            vjust =-0.15,
+            ) +
+  labs(title = 'Distribution of tumour stage and patient status',
+       x = "Tumour Stage",
+       y = '') +
+  facet_wrap(vars(Patient_Status)) +
+  scale_y_continuous(labels = scales::percent) +
+  our_theme(legend_position = 'none')
+
+ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
+       width = 8,
+       height = 3,
+       units = "in",
+       path = '/cloud/project/results')
+
+
+#---- dead/alive plot
+=======
+>>>>>>> 4d2ec8e95cc64c899efb29194818a45e1474c12e
 my_data_clean_aug %>%     
   group_by(Tumour_Stage,
            Patient_Status) %>% 
