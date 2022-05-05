@@ -13,6 +13,7 @@ Authors:
 This project works with visualizations and analysis on the dataset 'Real Breast Cancer Data' from www.kaggle.com [1](https://www.kaggle.com/datasets/amandam1/breastcancerdataset/discussion?resource=download&fbclid=IwAR0XJfeVbma_2KhCVVmfCBzy2i7bya_TTCP7LWwK-8PWMkE1watNLZyu3wg). \\ The analysis and visualizations are written in Tidyverse R.
 
 Furthermore, the repository is linked to a shiny-app repository handling the same dataset, but for dynamic visualizations with user inputs.
+The app contains three visualization panels, related to 'General data', 'Principal component analysis' and 'Density of protein expression'. It also contains a main page with a description of usage (see also Operation in README).
 
 Date of creation: *20th of April 2022*\
 Last updated: *2nd of May 2022*
@@ -21,7 +22,16 @@ Last updated: *2nd of May 2022*
 
 To run the project, run the /project/R/00_doit.R script, which will run the relevant files and generate results in the /project/results/ folder.
 
-MIKKEL NEEDS TO WRITE SHINY APP OPERATION
+The app contains four panels:
+- **Home:** Purely descriptive.
+- **Variable overview:** Has two display areas, one for box-/violin plots and one for histograms.\
+    - *Box-/violin plots:*
+        - Numeric variables: Protein1 to Protein4 and Age
+        - Discrete variables: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
+        - Color grouping: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
+    - *Histogram:*
+        - Discrete variable: Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
+        - Colour grouping: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
 
 ## File Structure
 

@@ -1,10 +1,5 @@
 # Load all packages
-library("tidyverse")
-library("fs")
-library("patchwork")
-library("broom")
-library("ggplot2")
-library("cowplot")
+# Loaded in 01_load.R script
 
 
 # Run all scripts ---------------------------------------------------------

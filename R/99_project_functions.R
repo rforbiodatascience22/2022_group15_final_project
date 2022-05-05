@@ -1,5 +1,5 @@
 # Load libraries ----------------------------------------------------------
-# Libraries are loaded in the 00_doit.R script
+# Loaded in 01_load.R script
 
 # Load data
 load_data_clean_aug <- function(){
