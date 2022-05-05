@@ -17,15 +17,18 @@ Furthermore, the repository is linked to a [shiny-app repository](https://github
 The app contains three visualization panels, related to 'General data', 'Principal component analysis' and 'Density of protein expression'. It also contains a main page with a description of usage (see also Operation in README).
 The app is linked, by downloading the relevant functions and data wrangling files from this repository, and then running this analysis before launching.
 
-LINK TO APP REPOSITORY: https://github.com/rforbiodatascience22/group_15_final_project_app
+**LINK TO APP REPOSITORY:** https://github.com/rforbiodatascience22/group_15_final_project_app
 
 Date of creation: *20th of April 2022*\
 Last updated: *5th of May 2022*
 
 ## Operation
 
-To run the project, run the /project/R/00_doit.R script, which will run the relevant files and generate results in the /project/results/ folder.
+**Main repository**
+To run the project, run the R/00_doit.R script, which will run the relevant files and generate results in the results/ folder.
 
+**App repository**
+The app is launched by running dev/run_dev.R.
 The app contains four panels:
 - **Home:** Purely descriptive.
 - **Variable overview:** Has two display areas, one for box-/violin plots and one for histograms.
