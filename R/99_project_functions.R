@@ -64,7 +64,7 @@ dens_protein_BRCA <- function(data, proteins, attribute){
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
   
-  pca_fit <- my_data_clean_aug %>% 
+  pca_fit <- data %>% 
     select("Age",matches("Protein")) %>% 
     prcomp(scale = TRUE)
   
