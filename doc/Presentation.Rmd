@@ -71,18 +71,23 @@ knitr::include_graphics("./fileflow.png")
 
 ## Results: Plot recreations
 <div style="float: left; width: 50%;">
-```{r recreation_percent_histologi, echo=FALSE, out.width='280px', out.height='280px', fig.align= 'center'}
+```{r percent_histologi, echo=FALSE, out.width='300px', out.height='230px', fig.align= 'center'}
 knitr::include_graphics(c("/cloud/project/doc/original_percent_histologi.png","/cloud/project/results/recreation_percent_histology.png"))
 ```
 </div>
 
 <div style="float: right; width: 50%;">
-```{r original_age_cancer_type, echo=FALSE, out.width='400px', out.height='200px', fig.align= 'center'}
+```{r age_cancer_type, echo=FALSE, out.width='450px', out.height='300px', fig.align= 'center'}
 knitr::include_graphics(c("/cloud/project/doc/original_are_range_per_cancer_type.png","/cloud/project/results/recreation_age_groups_by_cancer_type.png"))
 ```
 </div>
 
 ## Results: Data Visualization
+<div style="float: left; width: 50%;">
+```{r datavis1, echo=FALSE, out.width='280px', out.height='280px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/results/death_month_distribution.png","/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png"))
+```
+</div>
 
 
 
@@ -145,8 +150,9 @@ p1 <- pca_fit %>%
   geom_text(aes(label = column),
             hjust = 1,
             nudge_x = 0.15,
-            nudge_y = 0.08,
-            color = "#fb0100") +
+            nudge_y = 0.09,
+            color = "#fb0100",
+            size=3.2) +
   coord_fixed() +
   our_theme()
 
