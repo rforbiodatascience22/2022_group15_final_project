@@ -26,7 +26,8 @@ load_data_clean_aug <- function(){
 
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
-                      x_angle = 0){
+                      x_angle = 0,
+                      text_size = 10){
   if(x_angle != 0){
     x_hjust = 1
   }else{
@@ -34,7 +35,7 @@ our_theme <- function(legend_position = 'right',
   }
   
   theme_minimal(base_family = 'Avenir',
-                base_size = 10) +
+                base_size = text_size) +
   theme(axis.text.x = element_text(angle = x_angle, hjust=x_hjust),
           legend.position = legend_position,
           plot.title = element_text(hjust = 0.5),

@@ -16,11 +16,12 @@ my_data_clean_aug %>%
   geom_bar(color = "black") +
   facet_wrap(vars(Histology)) +
   scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
-  labs(title = 'Age ranges for each cancer type',
+  labs(title = 'Recreation: Age ranges for each cancer type',
        x = 'Age ranges',
        y = 'Count') +
   our_theme(legend_position = 'none',
-            x_angle = 45) +
+            x_angle = 45,
+            text_size = 12) +
   scale_y_continuous(breaks = seq(0, 100, 5))
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
