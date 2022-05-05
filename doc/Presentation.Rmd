@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r include = FALSE}
-source(file = "/cloud/project/R/00_doit.R",local = FALSE)
+#source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 ## Introduction to the Dataset
