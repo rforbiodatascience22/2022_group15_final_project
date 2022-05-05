@@ -27,9 +27,15 @@ load_data_clean_aug <- function(){
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
                       x_angle = 0){
+  if(x_angle != 0){
+    x_hjust = 1
+  }else{
+    x_hjust = 0.5
+  }
+  
   theme_minimal(base_family = 'Avenir',
                 base_size = 10) +
-  theme(axis.text.x = element_text(angle = x_angle, hjust=1),
+  theme(axis.text.x = element_text(angle = x_angle, hjust=x_hjust),
           legend.position = legend_position,
           plot.title = element_text(hjust = 0.5),
           panel.grid.minor = element_line(colour="white", 
@@ -55,7 +61,7 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     our_theme(legend_position = "bottom")
 }
 
-#dens_protein_BRCA(data = my_data_clean_aug,proteins = c("Protein1","Protein2"),attribute = "Histology")
+dens_protein_BRCA(data = my_data_clean_aug,proteins = c("Protein1","Protein2"),attribute = "Histology")
 
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
