@@ -89,27 +89,52 @@ dens_protein_BRCA <- function(data, proteins, attribute){
 
 #### PCA ANALYSIS ####
 
-pca_vis_BRCA <- function(data, PC1, PC2){
-  data_wide <- data %>%
-    select(Age,matches("Protein"),Patient_Status_Binary) %>%
-    mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
-                                             Patient_Status_Binary == 1 ~ '1')) %>%
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"),
-              ~(scale(.) %>%  as.vector))
+pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
+  # Renaming PC inputs
+  PC_1 = str_c(".fitted",PC1)
+  PC_2 = str_c(".fitted",PC2)
   
-  data_wide %>%
+  # Select and scale data
+  data_wide <- my_data_clean_aug %>% 
+    select("Age",matches("Protein"),Attribute) %>% 
+    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
+              ~(scale(.) %>% as.vector))
+  
+  # Perform PCA and visualize
+  data_wide %>% 
     select(where(is.numeric)) %>%
-    prcomp(scale = TRUE) %>%
-    augment(data_wide) %>%
-    ggplot(aes(x = .fittedPC1,
-               y = .fittedPC2,
-               color = Patient_Status_Binary)) +
+    prcomp(scale = TRUE) %>% 
+    augment(data_wide) %>% 
+    ggplot(aes_string(x = PC_1, 
+                      y = PC_2,
+                      color = Attribute)) + 
     geom_point(size = 1.5) +
-    scale_color_discrete() +
-    theme_classic() +
-    background_grid() +
-    theme(legend.position = "bottom")
+    scale_color_discrete() + 
+    our_theme(legend_position = "bottom") +
+    background_grid()
 }
+
+# pca_vis_BRCA <- function(data, PC1, PC2){
+#   data_wide <- data %>%
+#     select(Age,matches("Protein"),Patient_Status_Binary) %>%
+#     mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
+#                                              Patient_Status_Binary == 1 ~ '1')) %>%
+#     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"),
+#               ~(scale(.) %>%  as.vector))
+#   
+#   data_wide %>%
+#     select(where(is.numeric)) %>%
+#     prcomp(scale = TRUE) %>%
+#     augment(data_wide) %>%
+#     ggplot(aes(x = .fittedPC1,
+#                y = .fittedPC2,
+#                color = Patient_Status_Binary)) +
+#     geom_point(size = 1.5) +
+#     scale_color_discrete() +
+#     theme_classic() +
+#     background_grid() +
+#     theme(legend.position = "bottom")
+# }
 
 ### Old version below - can properly be removed
 # pca_vis_BRCA <- function(data, PC1, PC2){
