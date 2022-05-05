@@ -1,5 +1,5 @@
 # Load libraries ----------------------------------------------------------
-# Libraries loaded in the 00_doit.R script
+# Loaded in 01_load.R script
 
 # Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")
@@ -118,6 +118,10 @@ ggsave(filename = 'age_bar_distribution.png',
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 552ceaf5263b2926dc5cffa6d3bdc7f07211acc8
 # Most patients have tumour stage II. Most of the patients are alive.
 my_data_clean_aug %>% 
   ggplot(aes(x = Tumour_Stage,
