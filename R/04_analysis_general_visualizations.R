@@ -151,7 +151,6 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        units = "in",
        path = '/cloud/project/results')
 
-
 #---- dead/alive plot
 my_data_clean_aug %>%     
   group_by(Tumour_Stage,
