@@ -36,16 +36,6 @@ our_theme <- function(legend_position = 'right',
                                           size=0.5))
 }
 
-# Plotting an atribute 
-histrogram_count <- function(data, atribute){
-  output <- ggplot(data, mapping = aes(x = {{atribute}})) + 
-    geom_bar(fill = 'dodgerblue4') + 
-    labs(y = 'Count') +
-    our_theme()
-  
-  return(output)
-}
-
 # Plotting protein expression vs. type of cancer
 dens_protein_BRCA <- function(data, proteins, attribute){
   data %>%
@@ -62,8 +52,10 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     facet_wrap(~Protein,
                nrow=4) +
     theme_classic() +
-    theme(legend.position = "bottom")
+    our_theme(legend_position = "bottom")
 }
+
+#dens_protein_BRCA(data = my_data_clean_aug,proteins = c("Protein1","Protein2"),attribute = "Histology")
 
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){

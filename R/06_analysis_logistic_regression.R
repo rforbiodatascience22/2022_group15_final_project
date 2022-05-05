@@ -7,7 +7,6 @@ source(file = "/cloud/project/R/99_project_functions.R")
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- load_data_clean_aug()
 
-
 # Wrangle data ------------------------------------------------------------
 models <- my_data_clean_aug %>% 
   select(Patient_Status_Binary,
@@ -21,16 +20,16 @@ models <- my_data_clean_aug %>%
                values_to = "Expr_level") %>% 
   group_by(Protein) %>% 
   nest() %>% 
-  ungroup() %>% 
+  ungroup() %>%
   mutate(mu_group = map(data,
                         ~glm(Patient_Status_Binary ~ Expr_level,
                              data = .,
                              family = binomial(link = "logit"))),
          tidied = map(.x = mu_group,
                       .f = tidy,
-                      conf.int = TRUE)) %>% 
-  unnest(tidied) %>% 
-  filter(term != "(Intercept)") %>% 
+                      conf.int = TRUE)) %>%
+  unnest(tidied) %>%
+  filter(term != "(Intercept)") %>%
   mutate(Significant = case_when(p.value < 0.05 ~ TRUE,
                                  p.value >= 0.05 ~ FALSE),
          neglog10p = -log10(p.value))
