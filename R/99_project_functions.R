@@ -200,4 +200,3 @@ barplot_BRCA <- function(data, attribute1, attribute2){
   return(my_plot)
 }
 
-barplot_BRCA(my_data_clean_aug, "Tumour_Stage", "Histology")
