@@ -35,16 +35,17 @@ ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
 #Percent of histology recreation from kaggle:
 my_data_clean_aug %>%     
   group_by(Histology) %>% 
-  summarise(N = 100*(n() / nrow(my_data_clean_aug))) %>%
-  ggplot(aes(x = Histology,
-             y = N)) +
+  summarise(percent = 100*(n() / nrow(my_data_clean_aug))) %>%
+  ggplot(mapping = aes(x = Histology,
+             y = percent)) +
   geom_bar(stat="identity",
            color = 'black',
            fill = '#1f77b4') +
   labs(title = 'Total cancer types in dataset by percentage',
        y = 'Percentage of patients') +
-  geom_text(aes(label=str_c(round(N,
-                                  digits = 2),'%')),
+  geom_text(aes(label=str_c(round(percent,
+                                  digits = 2),
+                            '%')),
             position = position_dodge(width=0.4),
             vjust=-0.2) +
   ylim(0,80) +
@@ -66,11 +67,11 @@ BRCA_data_long <- my_data_clean_aug %>%
                values_to = 'Expression_Level')
 
 BRCA_data_long %>% 
-  ggplot(data = .,
-         mapping = aes(x = Expression_Level,
-                       color = Histology)) + 
+  ggplot(mapping = aes(x = Expression_Level,
+                       color = Histology))+ 
   geom_density() + 
-  facet_wrap(~Protein,
+  scale_color_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+  facet_wrap(vars(Protein),
              nrow=4) +
   our_theme() + 
   labs(title = 'Histology density by protein',
@@ -146,7 +147,8 @@ my_data_clean_aug %>%
   geom_text(aes( label = scales::percent(..prop..),
                  y= ..prop.. ), 
             stat= "count", 
-            vjust = +1.5) +
+            vjust =-0.15,
+            ) +
   labs(title = 'Distribution of tumour stage and patient status',
        x = "Tumour Stage",
        y = '') +
@@ -161,4 +163,29 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        path = '/cloud/project/results')
 
 
+#---- dead/alive plot
+cols <- c("red", "blue","darkgreen")
+my_data_clean_aug %>%     
+  group_by(Tumour_Stage,Patient_Status) %>% 
+  summarise(n=n()) %>% 
+  group_by(Tumour_Stage) %>% 
+  mutate(percent=100*n/sum(n)) %>% 
+  ggplot(mapping = aes(x = Tumour_Stage,
+                       y = percent,
+                       fill = Tumour_Stage)) +
+  geom_bar(stat="identity",
+           color = 'black') +
+  scale_fill_manual(name = 'Tumour_Stage',
+                    values = cols) +
+  facet_wrap(vars(Patient_Status)) + 
+  geom_text(aes(label=str_c(round(percent,
+                                  digits = 2),
+                            '%')),
+            position = position_dodge(width=0.4),
+            vjust=-0.2) +
+  labs(title = 'Tumour stage vs. Patient Status',
+       x = "Tumour Stage",
+       y = 'Percent')
+  ylim(0,90) +
+  our_theme(legend_position = 'none') 
 
