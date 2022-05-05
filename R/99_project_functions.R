@@ -52,19 +52,20 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     ggplot(data = .,
            mapping = aes_string(x = "Expression_Level",
                                 color = attribute)) +
-    ggplot2::labs(x = "Expression Level",
-                  y = "Density") +
     geom_density() +
-    facet_wrap(~Protein,
+    scale_color_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+    facet_wrap(vars(Protein),
                nrow=4) +
-    theme_classic() +
-    our_theme(legend_position = "bottom")
+    our_theme(legend_position = "bottom") + 
+    labs(title = 'Histology density by protein',
+         x = 'Expression Level', 
+         y = 'Density')
 }
 
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
   
-  pca_fit <- my_data_clean_aug %>% 
+  pca_fit <- data %>% 
     select("Age",matches("Protein")) %>% 
     prcomp(scale = TRUE)
   

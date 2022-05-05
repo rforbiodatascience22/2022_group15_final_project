@@ -25,23 +25,24 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
 #Percent of histology recreation from kaggle:
 my_data_clean_aug %>%     
   group_by(Histology) %>% 
-  summarise(N = 100*(n() / nrow(my_data_clean_aug))) %>%
-  ggplot(aes(x = Histology,
-             y = N)) +
+  summarise(percent = 100*(n() / nrow(my_data_clean_aug))) %>%
+  ggplot(mapping = aes(x = Histology,
+             y = percent)) +
   geom_bar(stat="identity",
            color = 'black',
            fill = '#1f77b4') +
   labs(title = 'Total cancer types in dataset by percentage',
        y = 'Percentage of patients') +
-  geom_text(aes(label=str_c(round(N,
-                                  digits = 2),'%')),
+  geom_text(aes(label=str_c(round(percent,
+                                  digits = 2),
+                            '%')),
             position = position_dodge(width=0.4),
             vjust=-0.2) +
   ylim(0,80) +
@@ -49,34 +50,20 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_percent_histology.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
 #Protein expression by histology
 
 #Making new a new variable Protein
-BRCA_data_long <- my_data_clean_aug %>%
-  select(matches('Protein'), Histology) %>%
-  pivot_longer(cols = 1:4,
-               names_to = 'Protein',
-               values_to = 'Expression_Level')
-
-BRCA_data_long %>% 
-  ggplot(data = .,
-         mapping = aes(x = Expression_Level,
-                       color = Histology)) + 
-  geom_density() + 
-  facet_wrap(~Protein,
-             nrow=4) +
-  our_theme() + 
-  labs(title = 'Histology density by protein',
-       x = 'Expression Level', 
-       y = 'Density')
+dens_protein_BRCA(data = my_data_clean_aug,
+                  proteins = c('Protein1','Protein2','Protein3','Protein4'),
+                  attribute = "Histology")
 
 ggsave(filename = 'histology_density_by_protein.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -93,7 +80,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'death_month_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -110,7 +97,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_boxplot.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -126,36 +113,40 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_bar_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
-# Most patients have tumour stage II. Most of the patients are alive.
-my_data_clean_aug %>% 
-  ggplot(aes(x = Tumour_Stage,
-             group = Patient_Status)) + 
-  geom_bar(aes(y = ..prop.., 
-               fill = factor(..x..)), 
-           stat="count",
+my_data_clean_aug %>%     
+  group_by(Tumour_Stage,
+           Patient_Status) %>% 
+  summarise(n=n()) %>% 
+  #group_by(Tumour_Stage) %>% 
+  mutate(percent=100*n/sum(n)) %>% 
+  ungroup() %>% 
+  ggplot(mapping = aes(x = Tumour_Stage,
+                       y = percent,
+                       fill = Tumour_Stage)) + 
+  geom_bar(stat="identity",
            color = 'black') +
-  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
-  geom_text(aes( label = scales::percent(..prop..),
-                 y= ..prop.. ), 
-            stat= "count", 
-            vjust = +1.5) +
-  labs(title = 'Distribution of tumour stage and patient status',
+  scale_fill_manual(name = 'Tumour_Stage',
+                    values = c("#1f77b4", "#fb0100", "#128001")) +
+  facet_wrap(vars(Patient_Status)) + 
+  geom_text(aes(label=str_c(round(percent,
+                                  digits = 2),
+                            '%')),
+            position = position_dodge(width=0.4),
+            vjust=-0.2) +
+  labs(title = 'Tumour stage vs. Patient Status',
        x = "Tumour Stage",
-       y = '') +
-  facet_wrap(vars(Patient_Status)) +
-  scale_y_continuous(labels = scales::percent) +
+       y = 'Percent') +
+  ylim(0,90) +
   our_theme(legend_position = 'none')
 
 ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
-
-
 
