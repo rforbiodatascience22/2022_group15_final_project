@@ -24,7 +24,7 @@ To run the project, run the /project/R/00_doit.R script, which will run the rele
 
 The app contains four panels:
 - **Home:** Purely descriptive.
-- **Variable overview:** Has two display areas, one for box-/violin plots and one for histograms.\
+- **Variable overview:** Has two display areas, one for box-/violin plots and one for histograms.
     - *Box-/violin plots:*
         - Numeric variables: Protein1 to Protein4 and Age
         - Discrete variables: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
@@ -32,6 +32,16 @@ The app contains four panels:
     - *Histogram:*
         - Discrete variable: Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
         - Colour grouping: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
+- **Density plot:** Has one display area, with a density plot with up to four subplots.
+    - *Density plot:*
+        - Numeric variables: Protein1 to Protein4
+        - Discrete variables: Tumour Stage, Histology, Surgery type, and Patient Status
+- **PCA plot:** Has one display area, with a 2D scatter plot of different principal components chosen by the user. The plot can be colored according to discrete variables.
+    - *Scatter plot:*
+        - Numeric variables for X: Principal component 1 to 5
+        - Numeric variables for Y: Principal component 1 to 5
+        - Discrete variables: Tumour Stage, Histology, HER2 Status, Surgery type, and Patient Status
+
 
 ## File Structure
 
