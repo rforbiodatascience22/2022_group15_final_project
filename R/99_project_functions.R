@@ -92,7 +92,7 @@ pca_analysis <- function(data, Attribute="Patient_Status"){
   
   # Select and scale data
   data_wide <- my_data_clean_aug %>% 
-    select("Age",matches("Protein"),Attribute) %>% 
+    select("Age",matches("Protein")) %>% 
     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
               ~(scale(.) %>% as.vector))
   
@@ -103,7 +103,7 @@ pca_analysis <- function(data, Attribute="Patient_Status"){
   return(pca_fit)
 }
 
-pca_vis_BRCA2 <- function(data, PC1, PC2, Attribute="Patient_Status"){
+pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
   pca_fit <- pca_analysis(data = data, Attribute = Attribute)
   
   PC_1 = str_c(".fitted",PC1)
@@ -111,34 +111,6 @@ pca_vis_BRCA2 <- function(data, PC1, PC2, Attribute="Patient_Status"){
   
   pca_fit %>% 
     augment(data %>% select(Attribute)) %>% 
-    ggplot(aes_string(x = PC_1, 
-                      y = PC_2,
-                      color = Attribute)) + 
-    geom_point(size = 1.5) +
-    scale_color_discrete() + 
-    our_theme(legend_position = "bottom") +
-    background_grid()
-}
-
-
-pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
-  # Renaming PC inputs
-  PC_1 = str_c(".fitted",PC1)
-  PC_2 = str_c(".fitted",PC2)
-  
-  # Select and scale data
-  data_wide <- my_data_clean_aug %>% 
-    select("Age",matches("Protein"),Attribute) %>% 
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
-              ~(scale(.) %>% as.vector))
-  
-  pca_fit <- data_wide %>% 
-    select(where(is.numeric)) %>% 
-    prcomp(scale = TRUE) 
-  
-  # Perform PCA and visualize
-  pca_fit %>% 
-    augment(data_wide) %>% 
     ggplot(aes_string(x = PC_1, 
                       y = PC_2,
                       color = Attribute)) + 
