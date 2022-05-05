@@ -25,7 +25,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
@@ -50,7 +50,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_percent_histology.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
@@ -63,7 +63,7 @@ dens_protein_BRCA(data = my_data_clean_aug,
 
 ggsave(filename = 'histology_density_by_protein.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -80,7 +80,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'death_month_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -97,7 +97,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_boxplot.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -113,53 +113,25 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_bar_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
-# Most patients have tumour stage II. Most of the patients are alive.
-my_data_clean_aug %>% 
-  ggplot(aes(x = Tumour_Stage,
-             group = Patient_Status)) + 
-  geom_bar(aes(y = ..prop.., 
-               fill = factor(..x..)), 
-           stat="count",
-           color = 'black') +
-  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
-  geom_text(aes( label = scales::percent(..prop..),
-                 y= ..prop.. ), 
-            stat= "count", 
-            vjust =-0.15,
-            ) +
-  labs(title = 'Distribution of tumour stage and patient status',
-       x = "Tumour Stage",
-       y = '') +
-  facet_wrap(vars(Patient_Status)) +
-  scale_y_continuous(labels = scales::percent) +
-  our_theme(legend_position = 'none')
-
-ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
-       width = 8,
-       height = 3,
-       units = "in",
-       path = '/cloud/project/results')
-
-
-#---- dead/alive plot
-cols <- c("red", "blue","darkgreen")
 my_data_clean_aug %>%     
-  group_by(Tumour_Stage,Patient_Status) %>% 
+  group_by(Tumour_Stage,
+           Patient_Status) %>% 
   summarise(n=n()) %>% 
-  group_by(Tumour_Stage) %>% 
+  #group_by(Tumour_Stage) %>% 
   mutate(percent=100*n/sum(n)) %>% 
+  ungroup() %>% 
   ggplot(mapping = aes(x = Tumour_Stage,
                        y = percent,
-                       fill = Tumour_Stage)) +
+                       fill = Tumour_Stage)) + 
   geom_bar(stat="identity",
            color = 'black') +
   scale_fill_manual(name = 'Tumour_Stage',
-                    values = cols) +
+                    values = c("#1f77b4", "#fb0100", "#128001")) +
   facet_wrap(vars(Patient_Status)) + 
   geom_text(aes(label=str_c(round(percent,
                                   digits = 2),
@@ -168,7 +140,13 @@ my_data_clean_aug %>%
             vjust=-0.2) +
   labs(title = 'Tumour stage vs. Patient Status',
        x = "Tumour Stage",
-       y = 'Percent')
+       y = 'Percent') +
   ylim(0,90) +
-  our_theme(legend_position = 'none') 
+  our_theme(legend_position = 'none')
+
+ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
+       width = 8,
+       height = 4,
+       units = "in",
+       path = '/cloud/project/results')
 
