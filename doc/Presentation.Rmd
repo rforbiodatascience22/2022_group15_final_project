@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
-## Introduction to the Dataset
+## Introduction to the Dataset (Lasse)
 <div style="float: left; width: 85%;">
 ### The Dataset
 -   Real Breast Cancer Data
@@ -33,10 +33,6 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   Clean dataset has 307 observations and 14 variables
 -   Augmented dataset has 307 observations and 16 variables
 
-### Removed
--   Variables with no Patient Status
--   Columns with only one unique variable
--   Date of last visit in the future
 </div>
 
 <div style="float: left; width: 15%;">
@@ -45,7 +41,7 @@ knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ```
 </div>
 
-## Workflow
+## Fileflow & Methods (Soren)
 <div style="float: left; width: 40%;">
 ```{r workflow, echo=FALSE, out.width='250px', out.height='500px', fig.align= 'center'}
 knitr::include_graphics("/cloud/project/doc/workflow.png")
@@ -58,45 +54,34 @@ knitr::include_graphics("./fileflow.png")
 ```
 </div>
 
-## Materials and Methods
+## Data Wrangling (Helene)
 
-### Materials
-- The Clean Dataset
-
-### Methods
-- Logistic Regression
-- Principal Component Analysis
+Insert the flow
 
 
 
-## Results: Plot recreations
-<div style="float: left; width: 35%;">
-```{r percent_histologi, echo=FALSE, out.width='290px', out.height='270px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/doc/original_percent_histologi.png","/cloud/project/results/recreation_percent_histology.png"))
-```
-</div>
-
-<div style="float: right; width: 65%;">
+## Results: Plot recreations (Aldis)
+<div style="float: right; width: 100%;">
 ```{r age_cancer_type, echo=FALSE, out.width='550px', out.height='240px', fig.align= 'center'}
 knitr::include_graphics(c("/cloud/project/doc/original_are_range_per_cancer_type.png","/cloud/project/results/recreation_age_groups_by_cancer_type.png"))
 ```
 </div>
 
-## Results: Data Visualization
+## Results: Data Visualization (Aldis)
 <div style="float: left; width: 50%;">
 ```{r datavisualization1, echo=FALSE, out.width='370px', out.height='270px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/results/death_month_distribution.png","/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png"))
+knitr::include_graphics(c("/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png"))
 ```
 </div>
 
 <div style="float: left; width: 50%;">
 ```{r datavisualization2, echo=FALSE, out.width='370px', out.height='270px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/results/histology_density_by_protein.png","/cloud/project/results/age_boxplot.png"))
+knitr::include_graphics(c("/cloud/project/results/histology_density_by_protein.png"))
 ```
 </div>
 
 
-## Results: Logistic Regression
+## Results: Logistic Regression (Soren)
 ```{r}
 models %>% 
   select(Protein,
@@ -139,7 +124,7 @@ models %>%
        title = "Manhattan plot")
 ```
 
-## Results: Principal Component Analysis
+## Results: Principal Component Analysis (Lasse)
 <div style="float: left; width: 1110%;">
 ```{r}
 p1 <- pca_fit %>%
@@ -184,12 +169,12 @@ p1 + p2
 
 ## Results
 
-### Shiny Application
+### Shiny Application (Mikkel)
 - Link
 - Short demo
 
 
-## Discussion
+## Discussion/Conclusion (Helene)
 - Bad data
 - No significant results from the dataset
 - Large focus on app
