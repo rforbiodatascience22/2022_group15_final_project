@@ -36,7 +36,7 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 </div>
 HUSK KILDE
 <div style="float: left; width: 15%;">
-```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
+```{r breast_cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
 knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ```
 </div>
@@ -44,19 +44,29 @@ knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ## Fileflow & Methods (Soren)
 <div style="float: left; width: 40%;">
 ```{r workflow, echo=FALSE, out.width='250px', out.height='500px', fig.align= 'center'}
-knitr::include_graphics("/cloud/project/doc/workflow.png")
+knitr::include_graphics("/cloud/project/doc/method_flow.png")
 ```
 </div>
 
 <div style="float: left; width: 50%;">
 ```{r fileflow, echo=FALSE, out.width='550px', out.height='500px', fig.pos = 'center'}
-knitr::include_graphics("./fileflow.png")
+knitr::include_graphics("/cloud/project/doc/fileflow.png")
 ```
 </div>
 
 ## Data Wrangling (Helene)
 
-Insert the flow
+<div style="float: left; width: 85%;">
+### The Dataset
+-   Data wrangling flow
+
+</div>
+
+<div style="float: left; width: 15%;">
+```{r data_wrangling, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
+knitr::include_graphics("/cloud/project/doc/data_wrangling_flow.png")
+```
+</div>
 
 
 
