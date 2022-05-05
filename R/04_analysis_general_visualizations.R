@@ -5,8 +5,7 @@
 source(file = "/cloud/project/R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
-                              show_col_types = FALSE)
+my_data_clean_aug <- load_data_clean_aug()
 
 # Visualise data ----------------------------------------------------------
 

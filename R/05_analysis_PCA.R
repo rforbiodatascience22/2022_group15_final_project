@@ -1,11 +1,13 @@
 # Load libraries ----------------------------------------------------------
 # Libraries are loaded in the 01_load.R script
 
-# Define functions & load data --------------------------------------------
+# Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")
 
-# Wrangle data ------------------------------------------------------------
+# Load data ---------------------------------------------------------------
+my_data_clean_aug <- load_data_clean_aug()
 
+# Wrangle data ------------------------------------------------------------
 pca_fit <- pca_analysis(data = my_data_clean_aug, Attribute = "Patient_Status")
 
 # Visualise data ----------------------------------------------------------
