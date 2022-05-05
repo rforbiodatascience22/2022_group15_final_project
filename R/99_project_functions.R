@@ -88,6 +88,38 @@ dens_protein_BRCA <- function(data, proteins, attribute){
 
 
 #### PCA ANALYSIS ####
+pca_analysis <- function(data, Attribute="Patient_Status"){
+  
+  # Select and scale data
+  data_wide <- my_data_clean_aug %>% 
+    select("Age",matches("Protein"),Attribute) %>% 
+    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
+              ~(scale(.) %>% as.vector))
+  
+  pca_fit <- data_wide %>% 
+    select(where(is.numeric)) %>% 
+    prcomp(scale = TRUE) 
+  
+  return(pca_fit)
+}
+
+pca_vis_BRCA2 <- function(data, PC1, PC2, Attribute="Patient_Status"){
+  pca_fit <- pca_analysis(data = data, Attribute = Attribute)
+  
+  PC_1 = str_c(".fitted",PC1)
+  PC_2 = str_c(".fitted",PC2)
+  
+  pca_fit %>% 
+    augment(data %>% select(Attribute)) %>% 
+    ggplot(aes_string(x = PC_1, 
+                      y = PC_2,
+                      color = Attribute)) + 
+    geom_point(size = 1.5) +
+    scale_color_discrete() + 
+    our_theme(legend_position = "bottom") +
+    background_grid()
+}
+
 
 pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
   # Renaming PC inputs
@@ -100,10 +132,12 @@ pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
               ~(scale(.) %>% as.vector))
   
+  pca_fit <- data_wide %>% 
+    select(where(is.numeric)) %>% 
+    prcomp(scale = TRUE) 
+  
   # Perform PCA and visualize
-  data_wide %>% 
-    select(where(is.numeric)) %>%
-    prcomp(scale = TRUE) %>% 
+  pca_fit %>% 
     augment(data_wide) %>% 
     ggplot(aes_string(x = PC_1, 
                       y = PC_2,
@@ -113,6 +147,9 @@ pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
     our_theme(legend_position = "bottom") +
     background_grid()
 }
+
+pca_vis_BRCA(data = my_data_clean_aug, PC1 = "PC1",PC2 = "PC2")
+
 
 # pca_vis_BRCA <- function(data, PC1, PC2){
 #   data_wide <- data %>%
@@ -192,7 +229,7 @@ barplot_BRCA <- function(data, attribute1, attribute2){
   my_plot <- data %>%
     ggplot2::ggplot(ggplot2::aes_string(x = attribute1,
                                         fill = attribute2)) +
-    ggplot2::geom_bar() +
+    ggplot2::geom_bar(position="dodge") +
     ggplot2::labs(x = stringr::str_replace(attribute1,'_',' '),
                   y = "Count") +
     ggplot2::theme_classic() +
