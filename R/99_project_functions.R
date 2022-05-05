@@ -23,25 +23,6 @@ load_data_clean_aug <- function(){
   
   return(my_data_clean_aug)
 }
-# my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
-#                               na.strings = '',
-#                               colClasses = c('character',
-#                                              'numeric',
-#                                              'factor',
-#                                              'numeric',
-#                                              'numeric',
-#                                              'numeric',
-#                                              'numeric',
-#                                              'factor',
-#                                              'factor',
-#                                              'factor',
-#                                              'factor',
-#                                              'Date',
-#                                              'Date',
-#                                              'factor',
-#                                              'numeric'))
-
-#my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
 
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
@@ -64,7 +45,6 @@ histrogram_count <- function(data, atribute){
   
   return(output)
 }
-#histrogram_count(data = my_data_clean_aug, atribute = Patient_Status)
 
 # Plotting protein expression vs. type of cancer
 dens_protein_BRCA <- function(data, proteins, attribute){
@@ -85,24 +65,6 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     theme(legend.position = "bottom")
 }
 
-### Old version below - can properly be removed
-# Plotting protein expression vs. type of cancer
-# dens_protein_BRCA <- function(data, proteins, attribute){
-#   data %>%
-#     select({{proteins}},{{attribute}}) %>%
-#     pivot_longer(cols = 1:length({{proteins}}),
-#                  names_to = 'Protein',
-#                  values_to = 'Expression_Level') %>% 
-#     ggplot(data = .,
-#            mapping = aes(x = Expression_Level,
-#                          color = {{attribute}})) + 
-#     geom_density() + 
-#     facet_wrap(~Protein,
-#                nrow=4) +
-#     our_theme()
-# }
-
-
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
   
@@ -113,6 +75,7 @@ pca_analysis <- function(data, Attribute="Patient_Status"){
   return(pca_fit)
 }
 
+# 
 pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
   pca_fit <- pca_analysis(data = data, Attribute = Attribute)
   
