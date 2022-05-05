@@ -10,7 +10,7 @@ Authors:
 -   s183448: Lasse Rene
 -   s212956: Aldis Helga Björgvinsdóttir
 
-This project works with visualizations and analysis on the dataset 'Real Breast Cancer Data' from www.kaggle.com [1](https://www.kaggle.com/datasets/amandam1/breastcancerdataset/discussion?resource=download&fbclid=IwAR0XJfeVbma_2KhCVVmfCBzy2i7bya_TTCP7LWwK-8PWMkE1watNLZyu3wg). \ 
+This project works with visualizations and analysis on the dataset [Real Breast Cancer Data](https://www.kaggle.com/datasets/amandam1/breastcancerdataset/discussion?resource=download&fbclid=IwAR0XJfeVbma_2KhCVVmfCBzy2i7bya_TTCP7LWwK-8PWMkE1watNLZyu3wg) from www.kaggle.com.
 The analysis and visualizations are written in Tidyverse R.
 
 Furthermore, the repository is linked to a [shiny-app repository](https://github.com/rforbiodatascience22/group_15_final_project_app) handling the same dataset, but for dynamic visualizations with user inputs.
