@@ -34,7 +34,7 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   Augmented dataset has 307 observations and 16 variables
 
 </div>
-
+HUSK KILDE
 <div style="float: left; width: 15%;">
 ```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
 knitr::include_graphics("/cloud/project/doc/breastcancer.png")
@@ -125,46 +125,23 @@ models %>%
 ```
 
 ## Results: Principal Component Analysis (Lasse)
-<div style="float: left; width: 1110%;">
-```{r}
-p1 <- pca_fit %>%
-  tidy(matrix = "rotation") %>%
-  pivot_wider(names_from = "PC",
-              names_prefix = "PC",
-              values_from = "value") %>%
-  ggplot(aes(x = PC1,
-             y = PC2)) +
-  geom_segment(xend = 0,
-               yend = 0,
-               arrow = arrow_style) +
-  geom_text(aes(label = column),
-            hjust = 1,
-            nudge_x = 0.15,
-            nudge_y = 0.09,
-            color = "#fb0100",
-            size=3.2) +
-  coord_fixed() +
-  our_theme()
 
-p2 <- pca_fit %>%
-  tidy(matrix = "eigenvalues") %>%
-  filter(PC <= 10) %>% 
-  ggplot(aes(x = PC,
-             y = percent)) +
-  geom_col(fill = "#1f77b4",
-           color = 'black') +
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format(),
-                     expand = expansion(mult = c(0, 0.01))) +
-  our_theme() +
-  labs(y = 'Percentage')
+<div style="float: left; width: 50%;">
 
-p1 + p2
-```
-
+- PCA: Simplification of variation
+- Large values -> Large Protein3 expression
+- Equal distribution
+- Not useful for analysis
 
 </div> 
 
+<div style="float: right; width: 50%;">
+
+```{r PCAver3, echo=FALSE, out.width='320px', out.height='270px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/results/PCA_rotation_matrix.png","/cloud/project/results/PCA_barplot_PCAs.png"))
+```
+
+</div> 
 
 
 ## Results
