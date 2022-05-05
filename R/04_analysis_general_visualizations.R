@@ -38,7 +38,7 @@ my_data_clean_aug %>%
   geom_bar(stat="identity",
            color = 'black',
            fill = '#1f77b4') +
-  labs(title = 'Recreation: Total cancer types in dataset by percentage',
+  labs(title = 'Recreation: Total cancer types\nin dataset by percentage',
        x = 'Type of cancer',
        y = 'Percentage of patients [%]') +
   geom_text(aes(label=str_c(round(percent,
@@ -53,8 +53,8 @@ my_data_clean_aug %>%
                             "Infiltrating Lobular Carcinoma" = "Infiltrating\nLobular\nCarcinoma"))
 
 ggsave(filename = 'recreation_percent_histology.png',
-       width = 3.82,
-       height = 4.02,
+       width = 3.82*1.5,
+       height = 4.02*1.5,
        units = "in",
        path = '/cloud/project/results')
 
