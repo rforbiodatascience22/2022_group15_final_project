@@ -53,8 +53,8 @@ my_data_clean_aug %>%
                             "Infiltrating Lobular Carcinoma" = "Infiltrating\nLobular\nCarcinoma"))
 
 ggsave(filename = 'recreation_percent_histology.png',
-       width = 3.82*1.5,
-       height = 4.02*1.5,
+       width = 3.82,
+       height = 4.02,
        units = "in",
        path = '/cloud/project/results')
 
