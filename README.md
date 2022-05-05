@@ -29,7 +29,7 @@ The app contains four panels:
     - Numeric variables: Protein1 to Protein4 and Age
     - Discrete variables: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
     - Color grouping: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.\
-    *Histogram:*
+  *Histogram:*
     - Discrete variable: Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
     - Colour grouping: None, Tumour stage, Histology, HER2 status, Surgery type, and Patient status.
 
