@@ -57,23 +57,9 @@ ggsave(filename = 'recreation_percent_histology.png',
 #Protein expression by histology
 
 #Making new a new variable Protein
-BRCA_data_long <- my_data_clean_aug %>%
-  select(matches('Protein'), Histology) %>%
-  pivot_longer(cols = 1:4,
-               names_to = 'Protein',
-               values_to = 'Expression_Level')
-
-BRCA_data_long %>% 
-  ggplot(mapping = aes(x = Expression_Level,
-                       color = Histology))+ 
-  geom_density() + 
-  scale_color_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
-  facet_wrap(vars(Protein),
-             nrow=4) +
-  our_theme() + 
-  labs(title = 'Histology density by protein',
-       x = 'Expression Level', 
-       y = 'Density')
+dens_protein_BRCA(data = my_data_clean_aug,
+                  proteins = c('Protein1','Protein2','Protein3','Protein4'),
+                  attribute = "Histology")
 
 ggsave(filename = 'histology_density_by_protein.png',
        width = 8,
