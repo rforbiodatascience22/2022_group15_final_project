@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r include = FALSE}
-source(file = "/cloud/project/R/00_doit.R",local = FALSE)
+#source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 ## Introduction to the Dataset
@@ -32,7 +32,6 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   Raw dataset has 341 observations and 16 variables
 -   Clean dataset has 307 observations and 14 variables
 -   Augmented dataset has 307 observations and 16 variables
-  -   blaa
 
 ### Removed
 -   Variables with no Patient Status
@@ -42,7 +41,7 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 
 <div style="float: left; width: 15%;">
 ```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
-#knitr::include_graphics("/cloud/project/doc/breastcancer.png")
+knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ```
 </div>
 
@@ -68,9 +67,32 @@ knitr::include_graphics("./fileflow.png")
 - Logistic Regression
 - Principal Component Analysis
 
+
+
+## Results
+
+### Plot recreations
+<!-- <div style="float: left; width: 1110%;"> -->
+<!-- ```{r} -->
+<!-- pr1 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
+
+<!-- pr2 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
+
+<!-- pr3 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
+
+<!-- pr4 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
+
+<!-- (pr1 + pr2) / (pr3 + pr4) -->
+<!-- ``` -->
+
+
+<!-- </div>  -->
+
+
 ## Results
 
 ### Data Visualization
+
 
 
 ## Results
@@ -122,9 +144,9 @@ models %>%
 
 
 ### Principal Component Analysis
-<div class = "columns-2 >
+<div style="float: left; width: 1110%;">
 ```{r}
-pca_fit %>%
+p1 <- pca_fit %>%
   tidy(matrix = "rotation") %>%
   pivot_wider(names_from = "PC",
               names_prefix = "PC",
@@ -141,10 +163,8 @@ pca_fit %>%
             color = "#fb0100") +
   coord_fixed() +
   our_theme()
-```
 
-```{r}
-pca_fit %>%
+p2 <- pca_fit %>%
   tidy(matrix = "eigenvalues") %>%
   filter(PC <= 10) %>% 
   ggplot(aes(x = PC,
@@ -156,8 +176,14 @@ pca_fit %>%
                      expand = expansion(mult = c(0, 0.01))) +
   our_theme() +
   labs(y = 'Percentage')
+
+p1 + p2
 ```
-</div>
+
+
+</div> 
+
+
 
 ## Results
 
@@ -167,8 +193,9 @@ pca_fit %>%
 
 
 ## Discussion
+- Bad data
 - No significant results from the dataset
-
+- Large focus on app
 
 
 
