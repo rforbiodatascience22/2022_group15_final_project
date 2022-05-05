@@ -10,6 +10,8 @@ date: '2022-04-25'
 output:
   ioslides_presentation:
     logo: DTU_Logo.png
+    widescreen: true
+    smaller: True
 subtitle: Group 15
 ---
 
@@ -39,20 +41,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <div style="float: left; width: 15%;">
 ```{r breast cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
-#knitr::include_graphics("./breastcancer.png")
+#knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ```
 </div>
 
 ## Workflow
 <div style="float: left; width: 40%;">
 ```{r workflow, echo=FALSE, out.width='250px', out.height='500px', fig.align= 'center'}
-#knitr::include_graphics("./workflow.png")
+knitr::include_graphics("/cloud/project/doc/workflow.png")
 ```
 </div>
 
 <div style="float: left; width: 50%;">
 ```{r fileflow, echo=FALSE, out.width='450px', out.height='500px', fig.pos = 'center'}
-#knitr::include_graphics("./fileflow.png")
+knitr::include_graphics("./fileflow.png")
 ```
 </div>
 
@@ -67,18 +69,31 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Results
 
-### Data Vizulisation
+### Data Visualization
 
+
+## Results
 
 ### Logistic Regression
-- LR plot
+```{r logistic_regression, echo=FALSE, out.width='500px', out.height='500px', fig.align= 'center'}
+knitr::include_graphics("/cloud/project/results/manhattan_plot_logistic_regression.png")
+```
 
+## Results
 
 ### Principal Component Analysis
-- PCA plot
+
+```{r pca, echo=FALSE, out.width='1100px', out.height='500px', fig.pos = 'left'}
+knitr::include_graphics("/cloud/project/results/PCA_rotation_matrix.png")
+```
+
+
+## Results
 
 ### Shiny Application
 - Link
+- Short demo
+
 
 ## Discussion
 - No significant results from the dataset
