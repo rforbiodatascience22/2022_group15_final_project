@@ -161,7 +161,6 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
 
 
 #---- dead/alive plot
-cols <- c("red", "blue","darkgreen")
 my_data_clean_aug %>%     
   group_by(Tumour_Stage,Patient_Status) %>% 
   summarise(n=n()) %>% 
@@ -182,7 +181,7 @@ my_data_clean_aug %>%
             vjust=-0.2) +
   labs(title = 'Tumour stage vs. Patient Status',
        x = "Tumour Stage",
-       y = 'Percent')
+       y = 'Percent') +
   ylim(0,90) +
   our_theme(legend_position = 'none') 
 
