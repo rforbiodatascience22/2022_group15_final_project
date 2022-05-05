@@ -1,7 +1,5 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library("fs")
-library("patchwork")
+# Libraries loaded in 01_load.R
 
 # Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")

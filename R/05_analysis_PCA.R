@@ -1,7 +1,5 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library('broom')
-library('cowplot')
+# Libraries are loaded in the 01_load.R script
 
 # Define functions & load data --------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")
