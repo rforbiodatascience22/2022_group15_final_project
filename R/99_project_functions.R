@@ -167,7 +167,7 @@ barplot_BRCA <- function(data, attribute1, attribute2){
   my_plot <- data %>%
     ggplot2::ggplot(ggplot2::aes_string(x = attribute1,
                                         fill = attribute2)) +
-    ggplot2::geom_bar() +
+    ggplot2::geom_bar(position="dodge") +
     ggplot2::labs(x = stringr::str_replace(attribute1,'_',' '),
                   y = "Count") +
     ggplot2::theme_classic() +
@@ -175,3 +175,4 @@ barplot_BRCA <- function(data, attribute1, attribute2){
   return(my_plot)
 }
 
+barplot_BRCA(my_data_clean_aug, "Tumour_Stage", "Histology")
