@@ -1,54 +1,46 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library("fs")
-library("patchwork")
-library("broom")
-library("ggplot2")
-library("cowplot")
+# Libraries are loaded in the 01_load.R script
 
 # Load data
-my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
-                              na.strings = '',
-                              colClasses = c('character',
-                                             'numeric',
-                                             'factor',
-                                             'numeric',
-                                             'numeric',
-                                             'numeric',
-                                             'numeric',
-                                             'factor',
-                                             'factor',
-                                             'factor',
-                                             'factor',
-                                             'Date',
-                                             'Date',
-                                             'factor',
-                                             'numeric'))
-
-#my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv")
+load_data_clean_aug <- function(){
+  my_data_clean_aug <- read.csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
+                                na.strings = '',
+                                colClasses = c('character',
+                                               'numeric',
+                                               'factor',
+                                               'numeric',
+                                               'numeric',
+                                               'numeric',
+                                               'numeric',
+                                               'factor',
+                                               'factor',
+                                               'factor',
+                                               'factor',
+                                               'Date',
+                                               'Date',
+                                               'factor',
+                                               'numeric'))
+  
+  return(my_data_clean_aug)
+}
 
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
                       x_angle = 0){
+  if(x_angle != 0){
+    x_hjust = 1
+  }else{
+    x_hjust = 0.5
+  }
+  
   theme_minimal(base_family = 'Avenir',
                 base_size = 10) +
-  theme(axis.text.x = element_text(angle = x_angle, hjust=1),
+  theme(axis.text.x = element_text(angle = x_angle, hjust=x_hjust),
           legend.position = legend_position,
           plot.title = element_text(hjust = 0.5),
           panel.grid.minor = element_line(colour="white", 
                                           size=0.5))
 }
-
-# Plotting an atribute 
-histrogram_count <- function(data, atribute){
-  output <- ggplot(data, mapping = aes(x = {{atribute}})) + 
-    geom_bar(fill = 'dodgerblue4') + 
-    labs(y = 'Count') +
-    our_theme()
-  
-  return(output)
-}
-#histrogram_count(data = my_data_clean_aug, atribute = Patient_Status)
 
 # Plotting protein expression vs. type of cancer
 dens_protein_BRCA <- function(data, proteins, attribute){
@@ -66,44 +58,21 @@ dens_protein_BRCA <- function(data, proteins, attribute){
     facet_wrap(~Protein,
                nrow=4) +
     theme_classic() +
-    theme(legend.position = "bottom")
+    our_theme(legend_position = "bottom")
 }
-
-### Old version below - can properly be removed
-# Plotting protein expression vs. type of cancer
-# dens_protein_BRCA <- function(data, proteins, attribute){
-#   data %>%
-#     select({{proteins}},{{attribute}}) %>%
-#     pivot_longer(cols = 1:length({{proteins}}),
-#                  names_to = 'Protein',
-#                  values_to = 'Expression_Level') %>% 
-#     ggplot(data = .,
-#            mapping = aes(x = Expression_Level,
-#                          color = {{attribute}})) + 
-#     geom_density() + 
-#     facet_wrap(~Protein,
-#                nrow=4) +
-#     our_theme()
-# }
-
 
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
   
-  # Select and scale data
-  data_wide <- my_data_clean_aug %>% 
-    select("Age",matches("Protein"),Attribute) %>% 
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
-              ~(scale(.) %>% as.vector))
-  
-  pca_fit <- data_wide %>% 
-    select(where(is.numeric)) %>% 
-    prcomp(scale = TRUE) 
+  pca_fit <- my_data_clean_aug %>% 
+    select("Age",matches("Protein")) %>% 
+    prcomp(scale = TRUE)
   
   return(pca_fit)
 }
 
-pca_vis_BRCA2 <- function(data, PC1, PC2, Attribute="Patient_Status"){
+# 
+pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
   pca_fit <- pca_analysis(data = data, Attribute = Attribute)
   
   PC_1 = str_c(".fitted",PC1)
@@ -119,81 +88,6 @@ pca_vis_BRCA2 <- function(data, PC1, PC2, Attribute="Patient_Status"){
     our_theme(legend_position = "bottom") +
     background_grid()
 }
-
-
-pca_vis_BRCA <- function(data, PC1, PC2, Attribute="Patient_Status"){
-  # Renaming PC inputs
-  PC_1 = str_c(".fitted",PC1)
-  PC_2 = str_c(".fitted",PC2)
-  
-  # Select and scale data
-  data_wide <- my_data_clean_aug %>% 
-    select("Age",matches("Protein"),Attribute) %>% 
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
-              ~(scale(.) %>% as.vector))
-  
-  pca_fit <- data_wide %>% 
-    select(where(is.numeric)) %>% 
-    prcomp(scale = TRUE) 
-  
-  # Perform PCA and visualize
-  pca_fit %>% 
-    augment(data_wide) %>% 
-    ggplot(aes_string(x = PC_1, 
-                      y = PC_2,
-                      color = Attribute)) + 
-    geom_point(size = 1.5) +
-    scale_color_discrete() + 
-    our_theme(legend_position = "bottom") +
-    background_grid()
-}
-
-pca_vis_BRCA(data = my_data_clean_aug, PC1 = "PC1",PC2 = "PC2")
-
-
-# pca_vis_BRCA <- function(data, PC1, PC2){
-#   data_wide <- data %>%
-#     select(Age,matches("Protein"),Patient_Status_Binary) %>%
-#     mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
-#                                              Patient_Status_Binary == 1 ~ '1')) %>%
-#     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"),
-#               ~(scale(.) %>%  as.vector))
-#   
-#   data_wide %>%
-#     select(where(is.numeric)) %>%
-#     prcomp(scale = TRUE) %>%
-#     augment(data_wide) %>%
-#     ggplot(aes(x = .fittedPC1,
-#                y = .fittedPC2,
-#                color = Patient_Status_Binary)) +
-#     geom_point(size = 1.5) +
-#     scale_color_discrete() +
-#     theme_classic() +
-#     background_grid() +
-#     theme(legend.position = "bottom")
-# }
-
-### Old version below - can properly be removed
-# pca_vis_BRCA <- function(data, PC1, PC2){
-#   data_wide <- data %>% 
-#     select(Age,matches("Protein"),Patient_Status_Binary) %>% 
-#     mutate(Patient_Status_Binary = case_when(Patient_Status_Binary == 0 ~ '0',
-#                                              Patient_Status_Binary == 1 ~ '1')) %>% 
-#     mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
-#               ~(scale(.) %>%  as.vector))
-#   
-#   data_wide %>% 
-#     select(where(is.numeric)) %>%
-#     prcomp(scale = TRUE) %>% 
-#     augment(data_wide) %>% 
-#     ggplot(aes(x = .fittedPC1, 
-#                y = .fittedPC2, 
-#                color = Patient_Status_Binary)) + 
-#     geom_point(size = 1.5) +
-#     scale_color_discrete() +
-#     theme_classic() + 
-#     background_grid()
-# }
 
 
 # Boxplot - factorial as x, nummeric as y.

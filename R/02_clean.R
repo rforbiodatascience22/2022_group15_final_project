@@ -1,5 +1,5 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
+# Loaded in the 01_load.R script
 
 # Load data ---------------------------------------------------------------
 my_data <- read.csv(file = "/cloud/project/data/01_my_data.csv")
@@ -22,3 +22,5 @@ my_data_clean <- my_data %>%
 write_csv(x = my_data_clean,
           file = "/cloud/project/data/02_my_data_clean.csv")
 
+# Clean environment
+rm(my_data,my_data_clean)

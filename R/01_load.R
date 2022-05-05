@@ -1,6 +1,10 @@
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 library("fs")
+library("patchwork")
+library("broom")
+library("ggplot2")
+library("cowplot")
 
 # Make our own class to deal with the date columns being different from the default
 setClass('myDate')
@@ -31,3 +35,5 @@ my_data_raw <- read.csv(file = "/cloud/project/data/_raw/BRCA2.csv",
 write_csv(x = my_data_raw, 
           file = "/cloud/project/data/01_my_data.csv")
 
+# Clean up environment
+rm(my_data_raw)

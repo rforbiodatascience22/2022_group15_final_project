@@ -1,58 +1,28 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library('broom')
-library('cowplot')
+# Libraries are loaded in the 01_load.R script
 
 # Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-my_data_clean_aug <- read_csv(file = "/cloud/project/data/03_my_data_clean_aug.csv",
-                              show_col_types = FALSE)
+my_data_clean_aug <- load_data_clean_aug()
+
 # Wrangle data ------------------------------------------------------------
-
-outcome_data <- my_data_clean_aug %>%
-  bind_cols %>%
-  as_tibble %>%
-  relocate(Patient_Status) %>%
-  rename(outcome = Patient_Status) %>%
-  mutate(outcome = case_when(outcome == "Alive" ~ 0,
-                             outcome == "Dead" ~ 1))
-
-
-#Collect and scale the relevant data 
-data_wide <- outcome_data %>% 
-  select(Age,
-         Protein1,
-         Protein2,
-         Protein3,
-         Protein4,
-         outcome) %>% 
-  mutate(outcome = case_when(outcome == 0 ~ '0',
-                             outcome == 1 ~ '1')) %>% 
-  mutate_at(c("Age","Protein1", "Protein2","Protein3","Protein4"), ~(scale(.) %>% as.vector))
-
-# Model data
-pca_fit <- data_wide %>% 
-  select(where(is.numeric)) %>% # retain only numeric columns
-  prcomp(scale = TRUE) # do PCA on scaled data
+pca_fit <- pca_analysis(data = my_data_clean_aug, Attribute = "Patient_Status")
 
 # Visualise data ----------------------------------------------------------
 
-pca_fit %>%
-  augment(data_wide) %>% # add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2,
-             color = outcome)) + 
-  geom_point(size = 1.5) +
-  our_theme() +
-  scale_color_manual(values = c("0" = "#1f77b4",
-                                "1" = "#fb0100"))
+# Visualize comparison between principal components
+pca_vis_BRCA(data = my_data_clean_aug, PC1 = "PC1", PC2 = "PC2")
 
 ggsave(filename = 'PCA_fitted_PCs.png',
        width = 8,
        height = 3,
        units = "in",
        path = '/cloud/project/results')
+
+
+# Visualize impact of variables on principal components.
 
 # define arrow style for plotting
 arrow_style <- arrow(
@@ -86,6 +56,7 @@ ggsave(filename = 'PCA_rotation_matrix.png',
        units = "in",
        path = '/cloud/project/results')
 
+# Visualize variance explaned by each principal component
 pca_fit %>%
   tidy(matrix = "eigenvalues") %>%
   filter(PC <= 10) %>% 
