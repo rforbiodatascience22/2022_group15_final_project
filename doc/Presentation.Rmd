@@ -9,9 +9,10 @@ author:
 date: '2022-04-25'
 output:
   ioslides_presentation:
-    logo: DTU_Logo.png
+    logo: DTU_logo_square.png
     widescreen: true
     smaller: True
+    #css: styles.css
 subtitle: Group 15
 ---
 
@@ -19,8 +20,8 @@ subtitle: Group 15
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r}
-#source(file = "/cloud/project/R/00_doit.R",local = FALSE)
+```{r include = FALSE}
+source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 ## Introduction to the Dataset
@@ -53,7 +54,7 @@ knitr::include_graphics("/cloud/project/doc/workflow.png")
 </div>
 
 <div style="float: left; width: 50%;">
-```{r fileflow, echo=FALSE, out.width='450px', out.height='500px', fig.pos = 'center'}
+```{r fileflow, echo=FALSE, out.width='550px', out.height='500px', fig.pos = 'center'}
 knitr::include_graphics("./fileflow.png")
 ```
 </div>
@@ -75,18 +76,88 @@ knitr::include_graphics("./fileflow.png")
 ## Results
 
 ### Logistic Regression
-```{r logistic_regression, echo=FALSE, out.width='500px', out.height='500px', fig.align= 'center'}
-knitr::include_graphics("/cloud/project/results/manhattan_plot_logistic_regression.png")
+```{r}
+models %>% 
+  select(Protein,
+         neglog10p,
+         Significant) %>% 
+  ggplot(data = .,
+         mapping = aes(x = Protein,
+                       y = neglog10p)) + 
+  geom_point(mapping = aes(color = Significant),
+             size = 2,
+             alpha = 1) + 
+  geom_hline(mapping = aes(yintercept = -log10(0.05)),
+             color = "Black",
+             alpha = 0.5,
+             linetype = "dashed") + 
+  geom_polygon(mapping = aes(x = c(0.4,0.4,4.6,4.6),
+                             y = c(-log10(0.05),1.75,1.75,-log10(0.05))),
+               fill = "Green",
+               alpha = 0.1) +
+  geom_polygon(mapping = aes(x = c(0.4,0.4,4.6,4.6),
+                             y = c(-0,-log10(0.05),-log10(0.05),0)),
+               fill = "Red",
+               alpha = 0.1) +
+  annotate(geom = "text",
+           x = 1,
+           y = 1.7,
+           label = "Significant",
+           size = 2,
+           color = "Darkgreen") +
+  annotate(geom = "text",
+           x=1,
+           y=1.25,
+           label = "Insignificant",
+           size = 2,
+           color = "Darkred") +
+  our_theme(legend_position = "bottom",
+            x_angle = 45) +
+  labs(x = "",
+       y = "Negative log10 of p-value",
+       title = "Manhattan plot")
 ```
 
 ## Results
 
-### Principal Component Analysis
 
-```{r pca, echo=FALSE, out.width='1100px', out.height='500px', fig.pos = 'left'}
-knitr::include_graphics("/cloud/project/results/PCA_rotation_matrix.png")
+### Principal Component Analysis
+<div class = "columns-2 >
+```{r}
+pca_fit %>%
+  tidy(matrix = "rotation") %>%
+  pivot_wider(names_from = "PC",
+              names_prefix = "PC",
+              values_from = "value") %>%
+  ggplot(aes(x = PC1,
+             y = PC2)) +
+  geom_segment(xend = 0,
+               yend = 0,
+               arrow = arrow_style) +
+  geom_text(aes(label = column),
+            hjust = 1,
+            nudge_x = 0.15,
+            nudge_y = 0.08,
+            color = "#fb0100") +
+  coord_fixed() +
+  our_theme()
 ```
 
+```{r}
+pca_fit %>%
+  tidy(matrix = "eigenvalues") %>%
+  filter(PC <= 10) %>% 
+  ggplot(aes(x = PC,
+             y = percent)) +
+  geom_col(fill = "#1f77b4",
+           color = 'black') +
+  scale_x_continuous(breaks = 1:10) +
+  scale_y_continuous(labels = scales::percent_format(),
+                     expand = expansion(mult = c(0, 0.01))) +
+  our_theme() +
+  labs(y = 'Percentage')
+```
+</div>
 
 ## Results
 
