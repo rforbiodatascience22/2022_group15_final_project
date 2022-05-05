@@ -17,7 +17,7 @@ my_data_clean_aug %>%
   ggplot(mapping = aes(x = Age_Group,
                        fill = Histology)) +
   geom_bar(color = "black") +
-  facet_wrap(~ Histology) +
+  facet_wrap(vars(Histology)) +
   scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
   labs(title = 'Age ranges for each cancer type',
        x = 'Age ranges',
@@ -27,6 +27,9 @@ my_data_clean_aug %>%
   scale_y_continuous(breaks = seq(0, 100, 5))
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 #Percent of histology recreation from kaggle:
@@ -48,6 +51,9 @@ my_data_clean_aug %>%
   our_theme(x_angle = 45)
 
 ggsave(filename = 'recreation_percent_histology.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 #Protein expression by histology
@@ -72,6 +78,9 @@ BRCA_data_long %>%
        y = 'Density')
 
 ggsave(filename = 'histology_density_by_protein.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 # The distribution of the month that people die in.
@@ -86,6 +95,9 @@ my_data_clean_aug %>%
        y = 'Count') 
 
 ggsave(filename = 'death_month_distribution.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 # Age distribution
@@ -100,6 +112,9 @@ my_data_clean_aug %>%
   our_theme()
 
 ggsave(filename = 'age_boxplot.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 # Age distribution
@@ -113,6 +128,9 @@ my_data_clean_aug %>%
   our_theme()
 
 ggsave(filename = 'age_bar_distribution.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
@@ -128,15 +146,18 @@ my_data_clean_aug %>%
   geom_text(aes( label = scales::percent(..prop..),
                  y= ..prop.. ), 
             stat= "count", 
-            vjust = -.2) +
+            vjust = +1.5) +
   labs(title = 'Distribution of tumour stage and patient status',
        x = "Tumour Stage",
        y = '') +
-  facet_grid(~Patient_Status) +
+  facet_wrap(vars(Patient_Status)) +
   scale_y_continuous(labels = scales::percent) +
   our_theme(legend_position = 'none')
 
 ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
+       width = 8,
+       height = 3,
+       units = "in",
        path = '/cloud/project/results')
 
 
