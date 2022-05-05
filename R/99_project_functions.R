@@ -90,15 +90,9 @@ dens_protein_BRCA <- function(data, proteins, attribute){
 #### PCA ANALYSIS ####
 pca_analysis <- function(data, Attribute="Patient_Status"){
   
-  # Select and scale data
-  data_wide <- my_data_clean_aug %>% 
+  pca_fit <- my_data_clean_aug %>% 
     select("Age",matches("Protein")) %>% 
-    mutate_at(c("Age","Protein1","Protein2","Protein3","Protein4"), 
-              ~(scale(.) %>% as.vector))
-  
-  pca_fit <- data_wide %>% 
-    select(where(is.numeric)) %>% 
-    prcomp(scale = TRUE) 
+    prcomp(scale = TRUE)
   
   return(pca_fit)
 }
