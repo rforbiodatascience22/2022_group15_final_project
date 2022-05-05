@@ -24,8 +24,8 @@ my_data_clean_aug %>%
   scale_y_continuous(breaks = seq(0, 100, 5))
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
-       width = 8,
-       height = 5,
+       width = 13.74,
+       height = 4.33,
        units = "in",
        path = '/cloud/project/results')
 
@@ -38,19 +38,23 @@ my_data_clean_aug %>%
   geom_bar(stat="identity",
            color = 'black',
            fill = '#1f77b4') +
-  labs(title = 'Total cancer types in dataset by percentage',
-       y = 'Percentage of patients') +
+  labs(title = 'Recreation: Total cancer types in dataset by percentage',
+       x = 'Type of cancer',
+       y = 'Percentage of patients [%]') +
   geom_text(aes(label=str_c(round(percent,
                                   digits = 2),
                             '%')),
             position = position_dodge(width=0.4),
             vjust=-0.2) +
   ylim(0,80) +
-  our_theme(x_angle = 45)
+  our_theme(x_angle = 45) +
+  scale_x_discrete(labels=c("Infiltrating Ductal Carcinoma" = "Infiltrating\nDuctal\nCarcinoma",
+                            "Mucinous Carcinoma" = "Mucinous\nCarcinoma",
+                            "Infiltrating Lobular Carcinoma" = "Infiltrating\nLobular\nCarcinoma"))
 
 ggsave(filename = 'recreation_percent_histology.png',
-       width = 8,
-       height = 5,
+       width = 3.82,
+       height = 4.02,
        units = "in",
        path = '/cloud/project/results')
 
