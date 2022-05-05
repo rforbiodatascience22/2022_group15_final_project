@@ -25,7 +25,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
@@ -50,34 +50,20 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'recreation_percent_histology.png',
        width = 8,
-       height = 3,
+       height = 5,
        units = "in",
        path = '/cloud/project/results')
 
 #Protein expression by histology
 
 #Making new a new variable Protein
-BRCA_data_long <- my_data_clean_aug %>%
-  select(matches('Protein'), Histology) %>%
-  pivot_longer(cols = 1:4,
-               names_to = 'Protein',
-               values_to = 'Expression_Level')
-
-BRCA_data_long %>% 
-  ggplot(mapping = aes(x = Expression_Level,
-                       color = Histology))+ 
-  geom_density() + 
-  scale_color_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
-  facet_wrap(vars(Protein),
-             nrow=4) +
-  our_theme() + 
-  labs(title = 'Histology density by protein',
-       x = 'Expression Level', 
-       y = 'Density')
+dens_protein_BRCA(data = my_data_clean_aug,
+                  proteins = c('Protein1','Protein2','Protein3','Protein4'),
+                  attribute = "Histology")
 
 ggsave(filename = 'histology_density_by_protein.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -94,7 +80,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'death_month_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -111,7 +97,7 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_boxplot.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
@@ -127,11 +113,12 @@ my_data_clean_aug %>%
 
 ggsave(filename = 'age_bar_distribution.png',
        width = 8,
-       height = 3,
+       height = 4,
        units = "in",
        path = '/cloud/project/results')
 
 # Barplot of the tumour stages filled by patient status 
+<<<<<<< HEAD
 # Most patients have tumour stage II. Most of the patients are alive.
 my_data_clean_aug %>% 
   ggplot(aes(x = Tumour_Stage,
@@ -161,18 +148,22 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
 
 
 #---- dead/alive plot
+=======
+>>>>>>> 4d2ec8e95cc64c899efb29194818a45e1474c12e
 my_data_clean_aug %>%     
-  group_by(Tumour_Stage,Patient_Status) %>% 
+  group_by(Tumour_Stage,
+           Patient_Status) %>% 
   summarise(n=n()) %>% 
-  group_by(Tumour_Stage) %>% 
+  #group_by(Tumour_Stage) %>% 
   mutate(percent=100*n/sum(n)) %>% 
+  ungroup() %>% 
   ggplot(mapping = aes(x = Tumour_Stage,
                        y = percent,
-                       fill = Tumour_Stage)) +
+                       fill = Tumour_Stage)) + 
   geom_bar(stat="identity",
            color = 'black') +
   scale_fill_manual(name = 'Tumour_Stage',
-                    values = cols) +
+                    values = c("#1f77b4", "#fb0100", "#128001")) +
   facet_wrap(vars(Patient_Status)) + 
   geom_text(aes(label=str_c(round(percent,
                                   digits = 2),
@@ -183,5 +174,11 @@ my_data_clean_aug %>%
        x = "Tumour Stage",
        y = 'Percent') +
   ylim(0,90) +
-  our_theme(legend_position = 'none') 
+  our_theme(legend_position = 'none')
+
+ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
+       width = 8,
+       height = 4,
+       units = "in",
+       path = '/cloud/project/results')
 
