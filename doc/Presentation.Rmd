@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r}
-source(file = "/cloud/project/R/00_doit.R",local = FALSE)
+#source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 ## Introduction to the Dataset
@@ -28,6 +28,8 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   [Source](https://www.kaggle.com/code/varshinipj/breast-cancer-gene-data/data)
 -   Raw dataset has 341 observations and 16 variables
 -   Clean dataset has 307 observations and 14 variables
+-   Augmented dataset has 307 observations and 16 variables
+  -   blaa
 
 ### Removed
 -   Variables with no Patient Status
