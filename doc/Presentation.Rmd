@@ -69,35 +69,24 @@ knitr::include_graphics("./fileflow.png")
 
 
 
-## Results
+## Results: Plot recreations
+<div style="float: left; width: 50%;">
+```{r recreation_percent_histologi, echo=FALSE, out.width='280px', out.height='280px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/doc/original_percent_histologi.png","/cloud/project/results/recreation_percent_histology.png"))
+```
+</div>
 
-### Plot recreations
-<!-- <div style="float: left; width: 1110%;"> -->
-<!-- ```{r} -->
-<!-- pr1 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
+<div style="float: right; width: 50%;">
+```{r original_age_cancer_type, echo=FALSE, out.width='400px', out.height='200px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/doc/original_are_range_per_cancer_type.png","/cloud/project/results/recreation_age_groups_by_cancer_type.png"))
+```
+</div>
 
-<!-- pr2 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
-
-<!-- pr3 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
-
-<!-- pr4 <- "/cloud/project/results/Plot_from_Kaggle_to_Recreate.png" -->
-
-<!-- (pr1 + pr2) / (pr3 + pr4) -->
-<!-- ``` -->
-
-
-<!-- </div>  -->
-
-
-## Results
-
-### Data Visualization
+## Results: Data Visualization
 
 
 
-## Results
-
-### Logistic Regression
+## Results: Logistic Regression
 ```{r}
 models %>% 
   select(Protein,
@@ -140,10 +129,7 @@ models %>%
        title = "Manhattan plot")
 ```
 
-## Results
-
-
-### Principal Component Analysis
+## Results: Principal Component Analysis
 <div style="float: left; width: 1110%;">
 ```{r}
 p1 <- pca_fit %>%
