@@ -1,5 +1,5 @@
 # Load libraries ----------------------------------------------------------
-# Libraries loaded in the 01_load.R script.
+# Libraries loaded in the 00_doit.R script.
 
 # Load data ---------------------------------------------------------------
 my_data_clean <- read.csv(file = "/cloud/project/data/02_my_data_clean.csv")

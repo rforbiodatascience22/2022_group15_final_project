@@ -1,5 +1,5 @@
 # Load libraries ----------------------------------------------------------
-# Libraries loaded in 01_load.R
+# Libraries loaded in the 00_doit.R script
 
 # Define functions --------------------------------------------------------
 source(file = "/cloud/project/R/99_project_functions.R")

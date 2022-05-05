@@ -1,3 +1,12 @@
+# Load all packages
+library("tidyverse")
+library("fs")
+library("patchwork")
+library("broom")
+library("ggplot2")
+library("cowplot")
+
+
 # Run all scripts ---------------------------------------------------------
 source(file = "/cloud/project/R/01_load.R")
 source(file = "/cloud/project/R/02_clean.R")

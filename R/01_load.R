@@ -1,10 +1,5 @@
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library("fs")
-library("patchwork")
-library("broom")
-library("ggplot2")
-library("cowplot")
+# Loaded in the 00_doit.R script
 
 # Make our own class to deal with the date columns being different from the default
 setClass('myDate')
