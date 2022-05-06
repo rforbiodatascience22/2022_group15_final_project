@@ -151,13 +151,15 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        units = "in",
        path = '/cloud/project/results')
 
-#---- dead/alive plot
+#Tumour stage and patient status with percentage
 my_data_clean_aug %>%     
   group_by(Tumour_Stage) %>% 
   count(Patient_Status) %>% 
   mutate(percent=100*n/sum(n)) %>% 
-  ggplot(aes(x = Tumour_Stage, y = percent)) +
-  geom_col(aes(fill = Patient_Status), position = "dodge") +
+  ggplot(aes(x = Tumour_Stage,
+             y = percent,
+             fill = Patient_Status)) +
+  geom_col(position = "dodge") +
   geom_text(aes(label = str_c(round(percent,
                                     2),
                               '%'), 
@@ -166,18 +168,19 @@ my_data_clean_aug %>%
             position = position_dodge(width = 0.9),
             vjust = -0.2,
             hjust = 0.45,
-            size = 3) +
+            size = 4.5) +
   scale_fill_manual(values = c("#1f77b4", "#fb0100")) +
   our_theme() +
   labs(title = 'Tumour stage vs. Patient Status',
        x = "Tumour Stage",
-       y = 'Percentage [%]') +
+       y = 'Percentage [%]',
+       fill = 'Patient Status') +
   ylim(0,90) +
   our_theme()
 
 ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        width = 8,
-       height = 4,
+       height = 3.8,
        units = "in",
        path = '/cloud/project/results')
 
