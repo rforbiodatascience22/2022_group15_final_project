@@ -25,9 +25,8 @@ my_data_clean_aug %>%
   scale_y_continuous(breaks = seq(0, 100, 5))
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
-       width = 13.74,
-       height = 4.33,
-       units = "in",
+       width = 13,
+       height = 4.09,
        path = '/cloud/project/results')
 
 #Percent of histology recreation from kaggle:

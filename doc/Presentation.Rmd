@@ -87,9 +87,14 @@ knitr::include_graphics("/cloud/project/doc/data_wrangling_flow.png")
 </div>
 
 ## Results: Plot recreations (Aldis)
-<div style="float: right; width: 100%;">
-```{r age_cancer_type, echo=FALSE, out.width='570px', out.height='260px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/doc/original_are_range_per_cancer_type.png","/cloud/project/results/recreation_age_groups_by_cancer_type.png"))
+<div style="float: top; height: 45%;">
+```{r recreation1, echo=FALSE, out.width='687px', out.height='216px', fig.align= 'center'}
+knitr::include_graphics("/cloud/project/doc/original_are_range_per_cancer_type.png")
+```
+</div>
+<div style="float: bottom; height: 45%;">
+```{r recreation2, echo=FALSE, out.width='687px', out.height='216px', fig.align= 'center'}
+knitr::include_graphics("/cloud/project/results/recreation_age_groups_by_cancer_type.png")
 ```
 </div>
 
