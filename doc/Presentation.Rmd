@@ -1,11 +1,11 @@
 ---
 title: "Final Project"
 author:
-Aldís Helga Björgvinsdóttir (s212956)
-Helene Wegener (s173826)
-Lasse Rene (s183448)
-Søren Sandgaard (s173686)
-Mikkel Swartz (s174586)
+- Aldís Helga Björgvinsdóttir (s212956)
+- Helene Wegener (s173826)
+- Lasse Rene (s183448)
+- Søren Sandgaard (s173686)
+- Mikkel Swartz (s174586)
 date: '2022-05-09'
 output:
   ioslides_presentation:
@@ -18,10 +18,6 @@ subtitle: Group 15
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r include = FALSE}
-source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 ```
 
 ## Introduction to the Dataset (Lasse)
