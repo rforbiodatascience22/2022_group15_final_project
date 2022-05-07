@@ -44,7 +44,7 @@ models %>%
          mapping = aes(x = Protein,
                        y = neglog10p)) + 
   geom_point(mapping = aes(color = Significant),
-             size = 1.5,
+             size = 3,
              alpha = 1) + 
   geom_hline(mapping = aes(yintercept = -log10(0.05)),
              color = "Black",
