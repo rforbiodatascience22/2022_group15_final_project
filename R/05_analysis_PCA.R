@@ -44,14 +44,15 @@ pca_fit %>%
                arrow = arrow_style) +
   geom_text(aes(label = column),
             hjust = 1,
-            nudge_x = 0.15,
-            nudge_y = 0.08,
-            color = "#fb0100") +
+            nudge_x = 0.18,
+            nudge_y = 0.11,
+            color = "#fb0100",
+            size=2.5) +
   coord_fixed() +
   our_theme()
 
 ggsave(filename = 'PCA_rotation_matrix.png',
-       width = 8,
+       width = 3,
        height = 3,
        units = "in",
        path = '/cloud/project/results')
@@ -64,14 +65,11 @@ pca_fit %>%
              y = percent)) +
   geom_col(fill = "#1f77b4",
            color = 'black') +
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format(),
-                     expand = expansion(mult = c(0, 0.01))) +
   our_theme() +
   labs(y = 'Percentage')
 
 ggsave(filename = 'PCA_barplot_PCAs.png',
-       width = 8,
+       width = 3,
        height = 3,
        units = "in",
        path = '/cloud/project/results')

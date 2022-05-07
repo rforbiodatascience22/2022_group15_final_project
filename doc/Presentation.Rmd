@@ -1,7 +1,7 @@
 ---
 title: "Final Project"
 author:
-- Aldís Helga Björgvinsdóttir
+- Aldís Helga Björgvinsdóttir (s212956)
 - Helene Wegener
 - Lasse Rene
 - Søren Sandgaard
@@ -34,7 +34,7 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   Augmented dataset has 307 observations and 16 variables
 
 </div>
-
+HUSK KILDE
 <div style="float: left; width: 15%;">
 ```{r breast_cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
 knitr::include_graphics("/cloud/project/doc/breastcancer.png")
@@ -74,22 +74,33 @@ knitr::include_graphics("/cloud/project/doc/data_wrangling_flow.png")
 
 ## Results: Plot recreations (Aldis)
 <div style="float: right; width: 100%;">
-```{r age_cancer_type, echo=FALSE, out.width='550px', out.height='240px', fig.align= 'center'}
+```{r age_cancer_type, echo=FALSE, out.width='570px', out.height='260px', fig.align= 'center'}
 knitr::include_graphics(c("/cloud/project/doc/original_are_range_per_cancer_type.png","/cloud/project/results/recreation_age_groups_by_cancer_type.png"))
 ```
 </div>
 
 ## Results: Data Visualization (Aldis)
 <div style="float: left; width: 50%;">
-```{r datavisualization1, echo=FALSE, out.width='370px', out.height='270px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png"))
+```{r datavisualization1, echo=FALSE, out.width='350px', out.height='250px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png","/cloud/project/results/histology_density_by_protein.png"))
 ```
 </div>
 
 <div style="float: left; width: 50%;">
-```{r datavisualization2, echo=FALSE, out.width='370px', out.height='270px', fig.align= 'center'}
-knitr::include_graphics(c("/cloud/project/results/histology_density_by_protein.png"))
-```
+-   Percentage of patient status for each cancer stage
+-   Mortality increases with tumour stage
+-   Unequal subgroups in tumour stage variable
+\
+\
+\
+\
+\
+\
+\
+\
+-   Density of protein expression for cancer types
+-   Proteins are unknown
+-   Mucinous Carcinomase differentiates from other cancer types
 </div>
 
 
@@ -137,46 +148,23 @@ models %>%
 ```
 
 ## Results: Principal Component Analysis (Lasse)
-<div style="float: left; width: 1110%;">
-```{r}
-p1 <- pca_fit %>%
-  tidy(matrix = "rotation") %>%
-  pivot_wider(names_from = "PC",
-              names_prefix = "PC",
-              values_from = "value") %>%
-  ggplot(aes(x = PC1,
-             y = PC2)) +
-  geom_segment(xend = 0,
-               yend = 0,
-               arrow = arrow_style) +
-  geom_text(aes(label = column),
-            hjust = 1,
-            nudge_x = 0.15,
-            nudge_y = 0.09,
-            color = "#fb0100",
-            size=3.2) +
-  coord_fixed() +
-  our_theme()
 
-p2 <- pca_fit %>%
-  tidy(matrix = "eigenvalues") %>%
-  filter(PC <= 10) %>% 
-  ggplot(aes(x = PC,
-             y = percent)) +
-  geom_col(fill = "#1f77b4",
-           color = 'black') +
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format(),
-                     expand = expansion(mult = c(0, 0.01))) +
-  our_theme() +
-  labs(y = 'Percentage')
+<div style="float: left; width: 50%;">
 
-p1 + p2
-```
-
+- PCA: Simplification of variation
+- Large values -> Large Protein3 expression
+- Equal distribution
+- Not useful for analysis
 
 </div> 
 
+<div style="float: right; width: 50%;">
+
+```{r PCAver3, echo=FALSE, out.width='320px', out.height='270px', fig.align= 'center'}
+knitr::include_graphics(c("/cloud/project/results/PCA_rotation_matrix.png","/cloud/project/results/PCA_barplot_PCAs.png"))
+```
+
+</div> 
 
 
 ## Results

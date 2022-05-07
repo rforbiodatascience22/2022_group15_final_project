@@ -151,36 +151,36 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        units = "in",
        path = '/cloud/project/results')
 
-#---- dead/alive plot
+#Tumour stage and patient status with percentage
 my_data_clean_aug %>%     
-  group_by(Tumour_Stage,
-           Patient_Status) %>% 
-  summarise(n=n()) %>% 
-  #group_by(Tumour_Stage) %>% 
+  group_by(Tumour_Stage) %>% 
+  count(Patient_Status) %>% 
   mutate(percent=100*n/sum(n)) %>% 
-  ungroup() %>% 
-  ggplot(mapping = aes(x = Tumour_Stage,
-                       y = percent,
-                       fill = Tumour_Stage)) + 
-  geom_bar(stat="identity",
-           color = 'black') +
-  scale_fill_manual(name = 'Tumour_Stage',
-                    values = c("#1f77b4", "#fb0100", "#128001")) +
-  facet_wrap(vars(Patient_Status)) + 
-  geom_text(aes(label=str_c(round(percent,
-                                  digits = 2),
-                            '%')),
-            position = position_dodge(width=0.4),
-            vjust=-0.2) +
+  ggplot(aes(x = Tumour_Stage,
+             y = percent,
+             fill = Patient_Status)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = str_c(round(percent,
+                                    2),
+                              '%'), 
+                y = percent, 
+                group = Patient_Status),
+            position = position_dodge(width = 0.9),
+            vjust = -0.2,
+            hjust = 0.45,
+            size = 4.5) +
+  scale_fill_manual(values = c("#1f77b4", "#fb0100")) +
+  our_theme() +
   labs(title = 'Tumour stage vs. Patient Status',
        x = "Tumour Stage",
-       y = 'Percent') +
+       y = 'Percentage [%]',
+       fill = 'Patient Status') +
   ylim(0,90) +
-  our_theme(legend_position = 'none')
+  our_theme()
 
 ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
        width = 8,
-       height = 4,
+       height = 3.8,
        units = "in",
        path = '/cloud/project/results')
 
