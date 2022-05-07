@@ -56,19 +56,21 @@ knitr::include_graphics("/cloud/project/doc/fileflow.png")
 
 ## Data Wrangling (Helene)
 
-<div style="float: left; width: 85%;">
+<div style="float: left; width: 50%;">
 ### The Dataset
--   Data wrangling flow
+- Correct classes + date format 
+- Columns dropped: ER.status and PR.status
+
+- Patient status binary for PCA and logistic regression 
+- Death month to see the distribution of the month that people die in
 
 </div>
 
-<div style="float: left; width: 15%;">
-```{r data_wrangling, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
+<div style="float: left; width: 50%;">
+```{r data_wrangling, echo=FALSE, out.width='360', out.height='405', fig.align = 'center'}
 knitr::include_graphics("/cloud/project/doc/data_wrangling_flow.png")
 ```
 </div>
-
-
 
 ## Results: Plot recreations (Aldis)
 <div style="float: right; width: 100%;">
@@ -185,9 +187,16 @@ p1 + p2
 
 
 ## Discussion/Conclusion (Helene)
-- Bad data
-- No significant results from the dataset
-- Large focus on app
+### Summary
+- Data visualization, PC analysis, logistic regression modelling and shiny app creation
+- Organized file structure
+
+### Conclusions
+- Stage most people die from stage III cancer.
+
+### Improvementes
+- Where does the data comes from? (in what context was is created?)
+- What are the four proteins?
 
 
 
