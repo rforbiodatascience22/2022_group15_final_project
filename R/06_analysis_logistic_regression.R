@@ -44,7 +44,7 @@ models %>%
          mapping = aes(x = Protein,
                        y = neglog10p)) + 
   geom_point(mapping = aes(color = Significant),
-             size = 2,
+             size = 1.5,
              alpha = 1) + 
   geom_hline(mapping = aes(yintercept = -log10(0.05)),
              color = "Black",
@@ -59,26 +59,28 @@ models %>%
                fill = "Red",
                alpha = 0.1) +
   annotate(geom = "text",
-           x = 1,
+           x = 1.5,
            y = 1.7,
            label = "Significant",
-           size = 2,
+           size = 4,
            color = "Darkgreen") +
   annotate(geom = "text",
-           x=1,
+           x=1.5,
            y=1.25,
            label = "Insignificant",
-           size = 2,
+           size = 4,
            color = "Darkred") +
   our_theme(legend_position = "bottom",
-            x_angle = 45) +
+            x_angle = 45,
+            grid = FALSE,
+            text_size = 20) +
   labs(x = "",
        y = "Negative log10 of p-value",
        title = "Manhattan plot")
 
 ggsave(filename = "manhattan_plot_logistic_regression.png",
        width = 4,
-       height = 3,
+       height = 8,
        units = "in",
        path = "/cloud/project/results")
 

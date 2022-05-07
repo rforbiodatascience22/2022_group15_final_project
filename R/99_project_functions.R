@@ -27,20 +27,28 @@ load_data_clean_aug <- function(){
 # Function for main plot theme
 our_theme <- function(legend_position = 'right', 
                       x_angle = 0,
-                      text_size = 10){
+                      text_size = 10,
+                      grid = TRUE){
   if(x_angle != 0){
     x_hjust = 1
   }else{
     x_hjust = 0.5
   }
   
+  if(grid == TRUE){
+    gridsize = 0.5
+  }else{
+    gridsize = 0
+  }
+  
   theme_minimal(base_family = 'Avenir',
                 base_size = text_size) +
   theme(axis.text.x = element_text(angle = x_angle, hjust=x_hjust),
-          legend.position = legend_position,
-          plot.title = element_text(hjust = 0.5),
-          panel.grid.minor = element_line(colour="white", 
-                                          size=0.5))
+        legend.position = legend_position,
+        plot.title = element_text(hjust = 0.5),
+        panel.grid.minor = element_line(colour="white", 
+                                        size=gridsize),
+        panel.grid.major = element_line(size = gridsize))
 }
 
 # Plotting protein expression vs. type of cancer
