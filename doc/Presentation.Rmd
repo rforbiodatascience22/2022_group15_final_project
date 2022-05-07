@@ -1,12 +1,12 @@
 ---
 title: "Final Project"
 author:
-- Aldís Helga Björgvinsdóttir (s212956)
-- Helene Wegener
-- Lasse Rene
-- Søren Sandgaard
-- Mikkel Swartz
-date: '2022-04-25'
+Aldís Helga Björgvinsdóttir (s212956)
+Helene Wegener (s173826)
+Lasse Rene (s183448)
+Søren Sandgaard (s173686)
+Mikkel Swartz (s174586)
+date: '2022-05-09'
 output:
   ioslides_presentation:
     logo: DTU_Logo_blank.png
