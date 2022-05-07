@@ -30,15 +30,17 @@ source(file = "/cloud/project/R/00_doit.R",local = FALSE)
 -   Real Breast Cancer Data
 -   [Source](https://www.kaggle.com/code/varshinipj/breast-cancer-gene-data/data)
 -   Raw dataset has 341 observations and 16 variables
--   Clean dataset has 307 observations and 14 variables
--   Augmented dataset has 307 observations and 16 variables
+- Categorical and numeric variables
+<!-- -   Clean dataset has 307 observations and 14 variables -->
+<!-- -   Augmented dataset has 307 observations and 16 variables -->
 
 </div>
-HUSK KILDE
+
 <div style="float: left; width: 15%;">
 ```{r breast_cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
 knitr::include_graphics("/cloud/project/doc/breastcancer.png")
 ```
+<font size="1">Source: https://web-clipart.com/awareness-ribbon-svg/</font>
 </div>
 
 ## Fileflow & Methods (Soren)
@@ -152,6 +154,7 @@ models %>%
 <div style="float: left; width: 50%;">
 
 - PCA: Simplification of variation
+- Done on numeric values
 - Large values -> Large Protein3 expression
 - Equal distribution
 - Not useful for analysis
