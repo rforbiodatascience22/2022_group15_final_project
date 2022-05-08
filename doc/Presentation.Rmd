@@ -54,6 +54,7 @@ knitr::include_graphics("/cloud/project/doc/Breastcancer.svg")
   - Principal component analysis
   - Logistic Regression
   - Shiny App
+  - [Github Repository](https://github.com/rforbiodatascience22/2022_group15_final_project)
 </div>
 <div style="float: left; width: 50%;">
 ```{r workflow, echo=FALSE, out.width='550px', out.height='500px', fig.align= 'center'}
