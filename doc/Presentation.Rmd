@@ -1,11 +1,11 @@
 ---
 title: "Final Project"
 author:
-- Aldís Helga Björgvinsdóttir (s212956)
-- Helene Wegener (s173826)
-- Lasse Rene (s183448)
-- Søren Sandgaard (s173686)
-- Mikkel Swartz (s174586)
+-  Aldís Helga Björgvinsdóttir (s212956)
+-  Helene Wegener (s165827)
+-  Lasse Rene (s183448)
+-  Søren Sandgaard (s173686)
+-  Mikkel Swartz (s174586)
 date: '2022-05-09'
 output:
   ioslides_presentation:
@@ -20,12 +20,15 @@ subtitle: Group 15
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Introduction to the Dataset (Lasse)
+## Introduction to the Dataset
 <div style="float: left; width: 85%;">
 ### The Dataset
 -   Real Breast Cancer Data
+
 -   [Source](https://www.kaggle.com/code/varshinipj/breast-cancer-gene-data/data)
+
 -   Raw dataset has 341 observations and 16 variables
+
 - Categorical and numeric variables
 <!-- -   Clean dataset has 307 observations and 14 variables -->
 <!-- -   Augmented dataset has 307 observations and 16 variables -->
@@ -34,12 +37,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <div style="float: left; width: 15%;">
 ```{r breast_cancer, echo=FALSE, out.width='125px', out.height='125px', fig.align = 'left' }
-knitr::include_graphics("/cloud/project/doc/breastcancer.png")
+knitr::include_graphics("/cloud/project/doc/Breastcancer.svg")
 ```
 <font size="1">Source: https://web-clipart.com/awareness-ribbon-svg/</font>
 </div>
 
-## Fileflow & Methods (Soren)
+## Fileflow & Methods
 <div style="float: left; width: 40%;">
 - Workflow process
   - Data loading
@@ -64,7 +67,7 @@ knitr::include_graphics("/cloud/project/doc/fileflow.png")
 <!-- ``` -->
 <!-- </div> -->
 
-## Data Wrangling (Helene)
+## Data Wrangling
 
 <div style="float: left; width: 50%;">
 ### The Dataset
@@ -82,7 +85,7 @@ knitr::include_graphics("/cloud/project/doc/data_wrangling_flow.png")
 ```
 </div>
 
-## Results: Plot recreations (Aldis)
+## Results: Plot recreations
 <div style="float: top; height: 45%;">
 ```{r recreation1, echo=FALSE, out.width='687px', out.height='216px', fig.align= 'center'}
 knitr::include_graphics("/cloud/project/doc/original_are_range_per_cancer_type.png")
@@ -94,7 +97,7 @@ knitr::include_graphics("/cloud/project/results/recreation_age_groups_by_cancer_
 ```
 </div>
 
-## Results: Data Visualization (Aldis)
+## Results: Data Visualization
 <div style="float: left; width: 50%;">
 ```{r datavisualization1, echo=FALSE, out.width='350px', out.height='250px', fig.align= 'center'}
 knitr::include_graphics(c("/cloud/project/results/distribution_of_tumour_stage_and_patient_status.png","/cloud/project/results/histology_density_by_protein.png"))
@@ -119,7 +122,7 @@ knitr::include_graphics(c("/cloud/project/results/distribution_of_tumour_stage_a
 </div>
 
 
-## Results: Logistic Regression (Soren)
+## Results: Logistic Regression
 <div style="float: left; width: 40%;">
 - Numeric variables:
   - *Protein 1* to *Protein 4*
@@ -143,15 +146,19 @@ knitr::include_graphics("/cloud/project/doc/logistic_regression_flow.png")
 </div>
 
 
-## Results: Principal Component Analysis (Lasse)
+## Results: Principal Component Analysis
 
 <div style="float: left; width: 50%;">
 
 - PCA: Simplification of variation
+
 - Done on numeric values
+
 - Large values -> Large Protein3 expression
+
 - Equal distribution
-- Not useful for analysis
+
+- Not applied for further analysis
 
 </div> 
 
@@ -166,12 +173,12 @@ knitr::include_graphics(c("/cloud/project/results/PCA_rotation_matrix.png","/clo
 
 ## Results
 
-### Shiny Application (Mikkel)
-- Link
+### Shiny Application
+- Link: [https://github.com/rforbiodatascience22/group_15_final_project_app](https://github.com/rforbiodatascience22/group_15_final_project_app) 
 - Short demo
 
 
-## Discussion/Conclusion (Helene)
+## Discussion/Conclusion
 ### Summary
 - Data visualization, PC analysis, logistic regression modelling and shiny app creation
 - Organized file structure

@@ -1,6 +1,4 @@
-# Load all packages
-# Loaded in 01_load.R script
-
+# All packages are loaded in 01_load.R script
 
 # Run all scripts ---------------------------------------------------------
 source(file = "/cloud/project/R/01_load.R")
