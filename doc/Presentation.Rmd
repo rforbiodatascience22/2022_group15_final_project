@@ -72,11 +72,13 @@ knitr::include_graphics("/cloud/project/doc/fileflow.png")
 
 <div style="float: left; width: 50%;">
 ### The Dataset
-- Correct classes + date format 
+- Correct classes + date format
+
+- Only terminated patients are included 
 - Columns dropped: ER.status and PR.status
 
-- Patient status binary for PCA and logistic regression 
-- Death month to see the distribution of the month that people die in
+- 'Patient status binary' for PCA and logistic regression 
+- 'Death month' and 'Age group' for visualization
 
 </div>
 
@@ -169,18 +171,20 @@ knitr::include_graphics(c("/cloud/project/results/PCA_rotation_matrix.png","/clo
 - Link
 - Short demo
 
-
 ## Discussion/Conclusion (Helene)
 ### Summary
-- Data visualization, PC analysis, logistic regression modelling and shiny app creation
-- Organized file structure
+- Data wrangling, data visualization, PC analysis, logistic regression modeling and shiny app creation
+- Organized file structure and GitHub
 
 ### Conclusions
-- Stage most people die from stage III cancer.
+- Stage III cancer has the highest mortality 
+- Logistic regression: Protein expression level and mortality are not significantly correlated. 
+- Others analysis and deep learning model showed low performance
 
-### Improvementes
-- Where does the data comes from? (in what context was is created?)
+### Improvements
 - What are the four proteins?
+- Another data set with other proteins.
+
 
 
 
