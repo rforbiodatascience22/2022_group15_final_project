@@ -15,7 +15,7 @@ my_data_clean_aug %>%
                        fill = Histology)) +
   geom_bar(color = "black") +
   facet_wrap(vars(Histology)) +
-  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+  scale_fill_manual(values = c("#1f77b4", "#fb0100", "#128001")) +
   labs(title = 'Recreation: Age ranges for each cancer type',
        x = 'Age ranges',
        y = 'Count') +
@@ -25,12 +25,11 @@ my_data_clean_aug %>%
   scale_y_continuous(breaks = seq(0, 100, 5))
 
 ggsave(filename = 'recreation_age_groups_by_cancer_type.png',
-       width = 13.74,
-       height = 4.33,
-       units = "in",
+       width = 13,
+       height = 4.09,
        path = '/cloud/project/results')
 
-#Percent of histology recreation from kaggle:
+#Recreation of Percent of histology from kaggle
 my_data_clean_aug %>%     
   group_by(Histology) %>% 
   summarise(percent = 100*(n() / nrow(my_data_clean_aug))) %>%
@@ -45,9 +44,9 @@ my_data_clean_aug %>%
   geom_text(aes(label=str_c(round(percent,
                                   digits = 2),
                             '%')),
-            position = position_dodge(width=0.4),
-            vjust=-0.2) +
-  ylim(0,80) +
+            position = position_dodge(width = 0.4),
+            vjust = -0.2) +
+  ylim(0, 80) +
   our_theme(x_angle = 45) +
   scale_x_discrete(labels=c("Infiltrating Ductal Carcinoma" = "Infiltrating\nDuctal\nCarcinoma",
                             "Mucinous Carcinoma" = "Mucinous\nCarcinoma",
@@ -59,8 +58,8 @@ ggsave(filename = 'recreation_percent_histology.png',
        units = "in",
        path = '/cloud/project/results')
 
-#Protein expression by histology
 
+#Protein expression by histology
 #Making new a new variable Protein
 dens_protein_BRCA(data = my_data_clean_aug,
                   proteins = c('Protein1','Protein2','Protein3','Protein4'),
@@ -90,7 +89,7 @@ ggsave(filename = 'death_month_distribution.png',
        path = '/cloud/project/results')
 
 # Age distribution
-# The age of the patients looks normal distributed in the boksplot.
+# The age of the patients looks normal distributed in the boxplot.
 my_data_clean_aug %>% 
   ggplot(mapping = aes(x = Age)) + 
   geom_boxplot(color = 'black',
@@ -122,21 +121,21 @@ ggsave(filename = 'age_bar_distribution.png',
        units = "in",
        path = '/cloud/project/results')
 
-# Barplot of the tumour stages filled by patient status 
 
+# Barplot of the tumour stages filled by patient status 
 # Most patients have tumour stage II. Most of the patients are alive.
 my_data_clean_aug %>% 
   ggplot(aes(x = Tumour_Stage,
              group = Patient_Status)) + 
   geom_bar(aes(y = ..prop.., 
                fill = factor(..x..)), 
-           stat="count",
+           stat = "count",
            color = 'black') +
-  scale_fill_manual(values=c("#1f77b4", "#fb0100", "#128001")) +
+  scale_fill_manual(values = c("#1f77b4", "#fb0100", "#128001")) +
   geom_text(aes( label = scales::percent(..prop..),
-                 y= ..prop.. ), 
-            stat= "count", 
-            vjust =-0.15,
+                 y =  ..prop.. ), 
+            stat = "count", 
+            vjust = -0.15,
             ) +
   labs(title = 'Distribution of tumour stage and patient status',
        x = "Tumour Stage",
@@ -155,7 +154,7 @@ ggsave(filename = 'distribution_of_tumour_stage_and_patient_status.png',
 my_data_clean_aug %>%     
   group_by(Tumour_Stage) %>% 
   count(Patient_Status) %>% 
-  mutate(percent=100*n/sum(n)) %>% 
+  mutate(percent =100*n/sum(n)) %>% 
   ggplot(aes(x = Tumour_Stage,
              y = percent,
              fill = Patient_Status)) +
