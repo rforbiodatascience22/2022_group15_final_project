@@ -179,19 +179,15 @@ knitr::include_graphics(c("/cloud/project/results/PCA_rotation_matrix.png","/clo
 - Link: [https://github.com/rforbiodatascience22/group_15_final_project_app](https://github.com/rforbiodatascience22/group_15_final_project_app) 
 - Short demo
 
-<<<<<<< HEAD
-## Discussion/Conclusion (Helene)
-=======
+## Discussion and Conclusion 
 
-## Discussion/Conclusion
->>>>>>> 0167b01a003f070308bd9873f6f3a07b58ef78a1
 ### Summary
-- Data wrangling, data visualization, PC analysis, logistic regression modeling and shiny app creation
+- Data wrangling, data visualization, PCA, logistic regression modeling and shiny app creation
 - Organized file structure and GitHub
 
 ### Conclusions
 - Stage III cancer has the highest mortality 
-- Logistic regression: Protein expression level and mortality are not significantly correlated. 
+- Logistic regression: Protein expression level and mortality are not significantly correlated 
 - Others analysis and deep learning model showed low performance
 
 ### Improvements
